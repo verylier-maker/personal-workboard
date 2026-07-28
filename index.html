@@ -722,9 +722,10 @@
 
       <div style="border-top:1px solid var(--elev);margin:14px 0"></div>
 
+      <!-- ⚠️⚠️⚠️ 澜舟的敏感数据区域：以下 input 绝不可删除/改名/改类型，否则 Key 会丢失！ -->
       <div class="modal-row">
-        <label>DeepSeek API Key</label>
-        <input type="password" id="apiKeyInput" placeholder="sk-...">
+        <label>DeepSeek API Key <span style="color:var(--accent);font-size:11px">（明文可见，自己复制保存）</span></label>
+        <input type="text" id="apiKeyInput" placeholder="sk-..." autocomplete="off">
         <div class="modal-hint">仅存在本机浏览器，不会上传。</div>
       </div>
       <div class="modal-row">
@@ -735,8 +736,8 @@
       <div style="border-top:1px solid var(--elev);margin:14px 0"></div>
 
       <div class="modal-row">
-        <label>GitHub Token（自动备份用）</label>
-        <input type="password" id="githubTokenInput" placeholder="ghp_...">
+        <label>GitHub Token（自动备份用） <span style="color:var(--accent);font-size:11px">（明文可见）</span></label>
+        <input type="text" id="githubTokenInput" placeholder="ghp_..." autocomplete="off">
         <div class="modal-hint">在 GitHub Settings → Developer settings → Personal access tokens → Tokens (classic) 生成，勾选 repo。</div>
       </div>
       <div class="modal-row">
@@ -778,6 +779,7 @@
       {id:'sleep',name:'🌙 早睡',icon:'🌙',subtitle:'几点躺下？几点起床？',fields:[{key:'bedtime',label:'睡觉时间',type:'time'},{key:'wakeup',label:'起床时间',type:'time'},{key:'quality',label:'睡眠质量（1-5）',type:'number'}]}
     ];
 
+    // ⚠️⚠️⚠️ 澜舟敏感字段保护：settings.apiKey 和 settings.githubToken 绝不可删除/改名/覆盖！加载时只做增量合并，不改已有值。
     let data={todos:{},habits:{},journal:{},invest:{},exercise:{},novel:{},wechat:{},health:{},fiveyear:{vision:'',milestones:[],actions:''},settings:{vault:'梦里星光',folder:'澜舟的工作台',apiKey:'',apiModel:'deepseek-v4-flash',githubToken:'',githubRepo:'workboard-backup',githubAutoBackup:false,theme:'theme-purple'}};
     let navDiaryDate=getToday(); let diaryOffset=0; let investFilter='all'; let wechatFilter='all'; let healthFilter='all'; let currentHabit=null; let currentNovelTopic=null; let timelineDate=getToday();
 
@@ -1126,8 +1128,10 @@
     function openTheme(){document.getElementById('themeModal').classList.add('show')}
     function closeTheme(){document.getElementById('themeModal').classList.remove('show')}
     function setTheme(t){document.body.className=t;data.settings.theme=t;saveData();closeTheme()}
+    // ⚠️⚠️⚠️ apiKey & githubToken 是澜舟已保存的密钥，此处只读不改结构！
     function openSettings(){document.getElementById('vaultNameInput').value=data.settings.vault||'梦里星光';document.getElementById('obsFolderInput').value=data.settings.folder||'澜舟的工作台';document.getElementById('apiKeyInput').value=data.settings.apiKey||'';document.getElementById('apiModelInput').value=data.settings.apiModel||'deepseek-v4-flash';document.getElementById('githubTokenInput').value=data.settings.githubToken||'';document.getElementById('githubRepoInput').value=data.settings.githubRepo||'workboard-backup';document.getElementById('githubAutoBackup').checked=data.settings.githubAutoBackup||false;document.getElementById('settingsModal').classList.add('show')}
     function closeSettings(){document.getElementById('settingsModal').classList.remove('show')}
+    // ⚠️⚠️⚠️ apiKey & githubToken 保存逻辑：从 input 读值写回 data.settings，字段名/ID 绝不可改！
     function saveSettings(){data.settings.vault=document.getElementById('vaultNameInput').value;data.settings.folder=document.getElementById('obsFolderInput').value;data.settings.apiKey=document.getElementById('apiKeyInput').value;data.settings.apiModel=document.getElementById('apiModelInput').value;data.settings.githubToken=document.getElementById('githubTokenInput').value;data.settings.githubRepo=document.getElementById('githubRepoInput').value;data.settings.githubAutoBackup=document.getElementById('githubAutoBackup').checked;saveData();document.getElementById('obsFolderDisplay').textContent=data.settings.folder||'澜舟的工作台';document.getElementById('backupStatus').textContent=(data.settings.githubAutoBackup&&data.settings.githubToken)?'自动备份已开启':'本地模式';closeSettings()}
 
     function refreshAll(){renderHome();renderNovel();renderWechat();renderHealth();renderFiveYear();loadTimelineDate();collectAllTags()}
