@@ -19,10 +19,8 @@
       --green:#00b894;--yellow:#fdcb6e;--red:#ff7675;--orange:#e17055;
       --quote-color:#a29bfe;
       --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
-      --radius:18px;--radius-sm:12px;
-      --icon-filter:none;
+      --radius:18px;--radius-sm:12px;--icon-filter:none;
     }
-    /* 极简白：明亮、干净、优雅 */
     .theme-minimal{
       --bg:#f7f8fa;--panel:#ffffff;--card:#ffffff;--elev:#f1f3f5;
       --text:#343a40;--sub:#868e96;--muted:#adb5bd;
@@ -32,7 +30,6 @@
       --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
       --icon-filter:drop-shadow(0 1px 1px rgba(0,0,0,.06));
     }
-    /* 森系绿：安静、自然 */
     .theme-forest{
       --bg:#0d1f17;--panel:#142920;--card:#1b3526;--elev:#234130;
       --text:#f1f8f4;--sub:#9db8a8;--muted:#6b8a78;
@@ -42,7 +39,6 @@
       --font:"PingFang SC","Microsoft YaHei","Noto Serif SC",serif;
       --icon-filter:sepia(.2) saturate(1.2);
     }
-    /* 暖樱粉：温柔、治愈 */
     .theme-sakura{
       --bg:#1f1218;--panel:#2d1b22;--card:#3d232d;--elev:#4f2d39;
       --text:#fff5f8;--sub:#e8c4d0;--muted:#b88a99;
@@ -52,7 +48,6 @@
       --font:"PingFang SC","Microsoft YaHei",cursive;
       --icon-filter:drop-shadow(0 0 4px rgba(255,179,198,.35));
     }
-    /* 深海蓝：沉稳、克制 */
     .theme-ocean{
       --bg:#0a1628;--panel:#101f38;--card:#162744;--elev:#1d3358;
       --text:#f0f7ff;--sub:#9fb8d4;--muted:#6b8cae;
@@ -70,14 +65,14 @@
     ::-webkit-scrollbar-track{background:transparent}
 
     /* 侧边栏 */
-    #sidebar{width:180px;background:var(--panel);border-right:1px solid var(--elev);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;transition:.25s}
-    .brand{text-align:center;padding:0 16px 24px;font-size:18px;font-weight:700;color:var(--text);letter-spacing:1px}
-    .brand span{font-size:22px;filter:var(--icon-filter)}
-    .nav-item{display:flex;align-items:center;gap:10px;padding:12px 20px;margin:2px 12px;border-radius:var(--radius-sm);color:var(--sub);cursor:pointer;transition:.2s;font-size:14px;position:relative}
+    #sidebar{width:190px;background:var(--panel);border-right:1px solid var(--elev);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;transition:.25s;z-index:50}
+    .brand{text-align:center;padding:0 16px 24px;font-size:17px;font-weight:700;color:var(--text);letter-spacing:0}
+    .brand span{font-size:20px;filter:var(--icon-filter)}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:11px 20px;margin:2px 12px;border-radius:var(--radius-sm);color:var(--sub);cursor:pointer;transition:.2s;font-size:14px;position:relative}
     .nav-item:hover{background:var(--elev);color:var(--text)}
     .nav-item.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.2)}
-    .nav-item .dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.5}
-    .sidebar-bottom{margin-top:auto;padding:16px;border-top:1px solid var(--elev)}
+    .nav-icon{font-size:17px;filter:var(--icon-filter);width:22px;text-align:center}
+    .sidebar-bottom{margin-top:auto;padding:16px;border-top:1px solid var(--elev);display:flex;flex-direction:column;gap:8px}
     .theme-btn{width:100%;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--elev);background:var(--card);color:var(--text);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:.2s}
     .theme-btn:hover{background:var(--elev)}
 
@@ -111,11 +106,11 @@
     .mini-cal-cell.today{box-shadow:inset 0 0 0 2px var(--accent)}
     .mini-cal-cell.future{color:var(--muted)}
 
-    /* 习惯网格 */
+    /* 习惯 */
     .section-title{font-size:15px;font-weight:600;margin:22px 0 12px;display:flex;align-items:center;justify-content:space-between}
     .habits{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px}
     .habit{background:var(--card);border-radius:var(--radius);padding:16px;cursor:pointer;transition:.2s;border:1px solid var(--elev);position:relative;overflow:hidden}
-    .habit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+    .habit:active{transform:scale(.98)}
     .habit.done{border-color:var(--green);background:linear-gradient(135deg,rgba(0,184,148,.12),var(--card))}
     .habit-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
     .habit-icon{font-size:26px;filter:var(--icon-filter)}
@@ -124,7 +119,7 @@
     .habit-check{position:absolute;right:14px;top:14px;width:24px;height:24px;border-radius:50%;border:2px solid var(--elev);display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.2s}
     .habit.done .habit-check{background:var(--green);border-color:var(--green);color:#fff}
 
-    /* 待办 & 计划池 */
+    /* 待办 */
     .todo-card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid var(--elev);margin-bottom:16px}
     .todo-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
     .todo-title{font-size:15px;font-weight:600}
@@ -132,19 +127,31 @@
     .todo-input-wrap{display:flex;gap:10px;margin-bottom:12px}
     .todo-input{flex:1;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:11px 14px;color:var(--text);font-size:14px;outline:none}
     .todo-input::placeholder{color:var(--muted)}
-    .btn{padding:10px 16px;border-radius:var(--radius-sm);border:none;background:var(--accent);color:#fff;font-size:14px;cursor:pointer;transition:.2s;font-weight:500}
-    .btn:hover{filter:brightness(1.1)}
+    .btn{padding:10px 16px;border-radius:var(--radius-sm);border:none;background:var(--accent);color:#fff;font-size:14px;cursor:pointer;transition:.2s;font-weight:500;white-space:nowrap}
+    .btn:active{filter:brightness(1.1)}
     .btn-text{background:transparent;color:var(--sub);padding:8px 12px}
     .btn-text:hover{color:var(--text);background:var(--elev)}
+    .btn-sm{padding:6px 10px;font-size:12px}
     .todo-list{display:flex;flex-direction:column;gap:8px}
     .todo-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--elev);border-radius:var(--radius-sm);transition:.2s}
     .todo-item.done{opacity:.55;text-decoration:line-through}
-    .todo-check{width:18px;height:18px;border-radius:5px;border:2px solid var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;color:transparent;font-size:11px}
+    .todo-check{width:18px;height:18px;border-radius:5px;border:2px solid var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;color:transparent;font-size:11px;flex-shrink:0}
     .todo-item.done .todo-check{background:var(--green);border-color:var(--green);color:#fff}
     .todo-text{flex:1;font-size:14px;word-break:break-all}
-    .todo-del{color:var(--red);cursor:pointer;font-size:16px;opacity:.7}
-    .todo-del:hover{opacity:1}
+    .todo-del{color:var(--red);cursor:pointer;font-size:16px;opacity:.7;flex-shrink:0}
+    .todo-del:active{opacity:1}
     .empty{text-align:center;color:var(--muted);font-size:13px;padding:18px 0}
+
+    /* 批注系统 (Inbox风格) */
+    .annotations{margin-top:6px;margin-left:28px}
+    .anno-item{font-size:12px;color:var(--muted);padding:4px 8px;margin:3px 0;border-left:2px solid var(--elev);line-height:1.5;display:flex;align-items:flex-start;gap:6px}
+    .anno-date{font-size:10px;color:var(--muted);opacity:.7;white-space:nowrap;min-width:48px}
+    .anno-text{flex:1}
+    .anno-del{color:var(--red);cursor:pointer;font-size:14px;opacity:.5;flex-shrink:0;padding:0 2px}
+    .anno-del:active{opacity:1}
+    .anno-input{width:100%;background:var(--elev);border:none;border-radius:6px;padding:8px 10px;color:var(--text);font-size:12px;outline:none;margin-top:6px;margin-left:28px}
+    .anno-input::placeholder{color:var(--muted)}
+    .anno-btn-wrap{text-align:right;margin-top:4px;margin-left:28px}
 
     /* 详情页 */
     .detail-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
@@ -157,21 +164,8 @@
     .field input,.field textarea,.field select{width:100%;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:12px 14px;color:var(--text);font-size:14px;outline:none;font-family:inherit}
     .field textarea{min-height:90px;resize:vertical}
     .checkin-big{width:100%;padding:16px;border-radius:var(--radius);border:none;background:linear-gradient(135deg,var(--green),#00cec9);color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}
-    .checkin-big:hover{filter:brightness(1.08)}
+    .checkin-big:active{filter:brightness(1.08)}
     .checkin-big:disabled{background:var(--muted);cursor:not-allowed}
-
-    /* 日历 */
-    .calendar-card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid var(--elev);margin-bottom:16px}
-    .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-    .cal-nav{cursor:pointer;font-size:18px;color:var(--sub);padding:4px 10px}
-    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}
-    .cal-day-name{font-size:11px;color:var(--sub);padding:6px 0}
-    .cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:13px;position:relative;cursor:default}
-    .cal-cell.today{border:2px solid var(--accent)}
-    .cal-cell.done{background:var(--green);color:#fff;font-weight:600}
-    .cal-cell.partial{background:var(--yellow);color:#000;font-weight:600}
-    .cal-cell.missed{background:var(--red);color:#fff;font-weight:600}
-    .cal-cell.future{color:var(--muted)}
 
     /* 文本区域 */
     .text-card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid var(--elev);margin-bottom:16px}
@@ -179,13 +173,37 @@
     .big-textarea{width:100%;min-height:160px;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:14px;color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit}
     .word-count{text-align:right;font-size:12px;color:var(--sub);margin-top:8px}
 
-    /* 投资/运动/写作面板 */
+    /* 标签切换 */
+    .tab-bar{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto}
+    .tab{padding:8px 16px;border-radius:20px;background:var(--elev);color:var(--sub);font-size:13px;cursor:pointer;transition:.2s;white-space:nowrap}
+    .tab.active{background:var(--accent);color:#fff}
+    .tab:active{filter:brightness(1.1)}
+
+    /* 小说主题卡片 */
+    .topic-card{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--elev);margin-bottom:14px;cursor:pointer;transition:.2s}
+    .topic-card:active{transform:scale(.98)}
+    .topic-card h4{margin:0 0 4px;font-size:16px}
+    .topic-card p{margin:0;font-size:13px;color:var(--sub)}
+    .topic-item{background:var(--elev);border-radius:var(--radius-sm);padding:10px 14px;font-size:14px;margin-bottom:8px}
+    .topic-item .tag-label{display:inline-block;padding:2px 8px;border-radius:10px;background:var(--accent);color:#fff;font-size:11px;margin-right:8px}
+    .topic-item .note-time{font-size:11px;color:var(--muted);margin-top:4px}
+
+    /* 健康 */
+    .health-item{background:var(--card);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--elev);margin-bottom:10px}
+    .health-item .h-type{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;margin-right:8px}
+    .health-item .h-type.symptom{background:var(--yellow);color:#000}
+    .health-item .h-type.med{background:var(--accent);color:#fff}
+    .health-item .h-date{font-size:11px;color:var(--muted);margin-top:6px}
+
+    /* 历史查看 */
+    .date-nav{display:flex;align-items:center;gap:14px;margin-bottom:20px;font-size:16px}
+    .date-nav .nav-arrow{width:32px;height:32px;border-radius:50%;background:var(--card);border:1px solid var(--elev);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);font-size:16px}
+    .date-nav .nav-date{cursor:pointer;font-weight:600}
+
+    /* 面板描述 */
     .panel-intro{color:var(--sub);font-size:13px;margin-bottom:18px}
-    .tag-list{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-    .tag{padding:6px 12px;border-radius:20px;background:var(--elev);color:var(--sub);font-size:12px;cursor:pointer;transition:.2s}
-    .tag:hover,.tag.active{background:var(--accent);color:#fff}
     .note-list{display:flex;flex-direction:column;gap:10px}
-    .note-item{background:var(--elev);border-radius:var(--radius-sm);padding:12px 14px;font-size:14px}
+    .note-item{background:var(--elev);border-radius:var(--radius-sm);padding:12px 14px;font-size:14px;position:relative}
     .note-time{font-size:11px;color:var(--muted);margin-top:6px}
     .danger{color:var(--red)}
     .success{color:var(--green)}
@@ -208,11 +226,11 @@
     .theme-name{flex:1;font-size:14px}
     .modal-close{width:100%;margin-top:12px;padding:10px;background:var(--elev);border:none;border-radius:var(--radius-sm);color:var(--text);cursor:pointer}
 
-    /* 移动端侧边栏隐藏 */
+    /* 移动端 */
     @media (max-width:768px){
       #sidebar{position:fixed;left:0;top:0;bottom:0;z-index:50;transform:translateX(-100%);width:220px}
-      #sidebar.open{transform:translateX(0)}
-      .menu-btn{position:fixed;top:14px;left:14px;z-index:60;width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--elev);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--text);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+      #sidebar.open{transform:translateX(0);box-shadow:4px 0 20px rgba(0,0,0,.3)}
+      .menu-btn{position:fixed;top:14px;left:14px;z-index:60;width:42px;height:42px;border-radius:50%;background:var(--card);border:1px solid var(--elev);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--text);box-shadow:0 4px 16px rgba(0,0,0,.2);cursor:pointer}
       #content{padding:60px 16px 30px}
       .grid{grid-template-columns:repeat(3,1fr)}
       .habits{grid-template-columns:1fr}
@@ -225,12 +243,13 @@
   <aside id="sidebar">
     <div class="brand"><span>🎯</span> 澜舟工作台</div>
     <nav>
-      <div class="nav-item active" data-page="home" onclick="go('home')"><span class="dot"></span>首页</div>
-      <div class="nav-item" data-page="diary" onclick="go('diary')"><span class="dot"></span>日记</div>
-      <div class="nav-item" data-page="invest" onclick="go('invest')"><span class="dot"></span>投资</div>
-      <div class="nav-item" data-page="exercise" onclick="go('exercise')"><span class="dot"></span>运动</div>
-      <div class="nav-item" data-page="writing" onclick="go('writing')"><span class="dot"></span>写作</div>
-      <div class="nav-item" data-page="fiveyear" onclick="go('fiveyear')"><span class="dot"></span>五年计划</div>
+      <div class="nav-item active" data-page="home" onclick="go('home')"><span class="nav-icon">🏠</span>首页</div>
+      <div class="nav-item" data-page="diary" onclick="go('diary')"><span class="nav-icon">📔</span>日记</div>
+      <div class="nav-item" data-page="invest" onclick="go('invest')"><span class="nav-icon">💰</span>投资</div>
+      <div class="nav-item" data-page="exercise" onclick="go('exercise')"><span class="nav-icon">🏃</span>运动</div>
+      <div class="nav-item" data-page="writing" onclick="go('writing')"><span class="nav-icon">✍️</span>写作</div>
+      <div class="nav-item" data-page="health" onclick="go('health')"><span class="nav-icon">💚</span>健康</div>
+      <div class="nav-item" data-page="fiveyear" onclick="go('fiveyear')"><span class="nav-icon">🎯</span>五年计划</div>
     </nav>
     <div class="sidebar-bottom">
       <button class="theme-btn" onclick="openTheme()">🎨 切换皮肤</button>
@@ -250,13 +269,8 @@
           <div class="card"><div class="card-label">连续天数</div><div class="card-value" id="statStreak">0</div></div>
         </div>
 
-        <div class="mini-cal">
-          <div class="mini-cal-head"><span>本月打卡</span><span style="font-size:12px;color:var(--sub);cursor:pointer" onclick="go('diary')">查看完整日历 →</span></div>
-          <div class="mini-cal-grid" id="miniCalGrid"></div>
-        </div>
-
         <div class="todo-card">
-          <div class="todo-head"><span class="todo-title">今日待办</span><span class="todo-meta">今天必须做完</span></div>
+          <div class="todo-head"><span class="todo-title">今日待办</span><span class="todo-meta">今天必须做完的</span></div>
           <div class="todo-input-wrap"><input class="todo-input" id="todayInput" placeholder="加一条今天必须做的事，回车添加" onkeydown="if(event.key==='Enter')addTodo('today')"><button class="btn" onclick="addTodo('today')">添加</button></div>
           <div class="todo-list" id="todayList"><div class="empty">今天还没有待办，加一条吧</div></div>
         </div>
@@ -270,9 +284,14 @@
           <div class="todo-list" id="poolList"><div class="empty">计划池是空的，把想做但不必今天做的事丢进来</div></div>
         </div>
 
+        <div class="mini-cal">
+          <div class="mini-cal-head"><span>本月打卡概览</span></div>
+          <div class="mini-cal-grid" id="miniCalGrid"></div>
+        </div>
+
         <div class="sync-card">
           <div class="sync-title">📝 同步到 Obsidian</div>
-          <div class="sync-desc">保存今天所有面板记录到 Obsidian。只会保存一份当天总笔记，自动落进「澜舟的工作台」文件夹。</div>
+          <div class="sync-desc">保存今天所有面板记录到「澜舟的工作台」文件夹。Advanced URI 模式：同一天可覆盖。</div>
           <div class="sync-btns">
             <button class="btn" onclick="saveToObsidian()">保存到 Obsidian</button>
             <button class="btn btn-secondary" onclick="copyMarkdown()">复制 Markdown</button>
@@ -293,21 +312,11 @@
       <!-- 日记 -->
       <section class="page" id="page-diary">
         <h1>日记</h1>
-        <p class="sub">打卡日历 + 自动复盘 + 今日速记</p>
-
-        <div class="calendar-card">
-          <div class="cal-head"><span class="cal-nav" onclick="changeMonth(-1)">‹</span><b id="calMonth">2026年7月</b><span class="cal-nav" onclick="changeMonth(1)">›</span></div>
-          <div class="cal-grid" id="calGrid"></div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;font-size:12px;color:var(--sub)">
-          <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--green);margin-right:4px"></span>全部完成</span>
-          <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--yellow);margin-right:4px"></span>部分完成</span>
-          <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);margin-right:4px"></span>一个没做</span>
-        </div>
-
-        <div class="text-card">
-          <h4>📋 今日复盘（自动生成）</h4>
-          <div class="big-textarea" id="autoReview" style="min-height:140px;background:transparent;padding:0"></div>
+        <div class="date-nav">
+          <div class="nav-arrow" onclick="navDiary(-1)">‹</div>
+          <div class="nav-date" id="diaryDateLabel" onclick="pickDate()">今天</div>
+          <div class="nav-arrow" onclick="navDiary(1)">›</div>
+          <button class="btn btn-sm btn-text" style="margin-left:auto" onclick="navDiary(0)">回到今天</button>
         </div>
 
         <div class="text-card">
@@ -315,37 +324,33 @@
           <textarea class="big-textarea" id="journal" placeholder="今天发生了什么？有什么想法？随便写..." oninput="saveJournal()"></textarea>
           <div class="word-count" id="journalCount">0 字</div>
         </div>
+
+        <div class="text-card">
+          <h4>📋 今日复盘（自动生成）</h4>
+          <div class="big-textarea" id="autoReview" style="min-height:140px;background:transparent;padding:0"></div>
+        </div>
+
+        <div class="todo-card">
+          <div class="todo-head"><span class="todo-title">💬 批注与补充</span></div>
+          <textarea class="anno-input" style="margin:0 0 6px 0" id="diaryAnnoInput" placeholder="对今天的复盘或速记补充一句..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){addDiaryAnno();event.preventDefault()}"></textarea>
+          <div style="text-align:right"><button class="btn btn-sm" onclick="addDiaryAnno()">添加批注</button></div>
+          <div id="diaryAnnos" style="margin-top:4px"></div>
+        </div>
       </section>
 
       <!-- 投资 -->
       <section class="page" id="page-invest">
         <h1>投资</h1>
-        <p class="panel-intro">长期交易备忘录。不追每日行情，只记关键操作和想法。</p>
+        <p class="panel-intro">长期交易备忘录。待办式记录，做完就勾掉。</p>
 
         <div class="todo-card">
-          <div class="todo-head"><span class="todo-title">交易记录与想法</span><span class="todo-meta">已执行 / 待执行</span></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-            <div class="field" style="margin:0"><label>类型</label><select id="invType"><option>已执行操作</option><option>待执行想法</option></select></div>
-            <div class="field" style="margin:0"><label>标的（可选）</label><input id="invTarget" placeholder="如：沪深300ETF"></div>
-          </div>
-          <div class="field"><label>内容</label><input id="invContent" placeholder="如：再平衡卖出5%仓位 / 等回调加仓红利" onkeydown="if(event.key==='Enter')addInvest()"></div>
-          <button class="btn" style="width:100%" onclick="addInvest()">记录</button>
-        </div>
-
-        <div class="todo-card">
-          <div class="todo-head"><span class="todo-title">记录列表</span></div>
-          <div class="note-list" id="investList"><div class="empty">还没有投资记录</div></div>
-        </div>
-
-        <div class="todo-card" style="display:none" id="positionCard">
-          <div class="todo-head"><span class="todo-title">持仓清单（可选）</span></div>
+          <div class="todo-head"><span class="todo-title">待办任务</span><span class="todo-meta">想操作什么？做完勾掉</span></div>
           <div class="todo-input-wrap">
-            <input class="todo-input" id="positionInput" placeholder="标的 - 仓位 - 备注" onkeydown="if(event.key==='Enter')addPosition()">
-            <button class="btn" onclick="addPosition()">添加</button>
+            <input class="todo-input" id="invTaskInput" placeholder="如：周末加仓红利 / 等回调到XX价买沪深300" onkeydown="if(event.key==='Enter')addInvestTask()">
+            <button class="btn" onclick="addInvestTask()">添加</button>
           </div>
-          <div class="note-list" id="positionList"><div class="empty">暂无持仓</div></div>
+          <div id="investTaskList"><div class="empty">还没有投资任务</div></div>
         </div>
-        <div style="text-align:center;margin:8px 0"><button class="btn-text" onclick="togglePosition()">显示/隐藏 持仓清单</button></div>
       </section>
 
       <!-- 运动 -->
@@ -378,27 +383,79 @@
       <!-- 写作 -->
       <section class="page" id="page-writing">
         <h1>写作</h1>
-        <p class="panel-intro">灵感速记、碎片想法、选题雏形。写得好不好不重要，先记下来。</p>
-
-        <div class="tag-list" id="writingTags">
-          <span class="tag active" data-tag="全部" onclick="filterWriting('全部')">全部</span>
-          <span class="tag" data-tag="选题" onclick="filterWriting('选题')">选题</span>
-          <span class="tag" data-tag="金句" onclick="filterWriting('金句')">金句</span>
-          <span class="tag" data-tag="素材" onclick="filterWriting('素材')">素材</span>
-          <span class="tag" data-tag="随想" onclick="filterWriting('随想')">随想</span>
+        <div class="tab-bar">
+          <div class="tab active" onclick="switchWritingTab('novel')">📖 小说</div>
+          <div class="tab" onclick="switchWritingTab('wechat')">📱 公众号</div>
         </div>
 
-        <div class="todo-card">
-          <div class="todo-input-wrap">
-            <select id="writeTag" style="width:auto;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:10px 12px;color:var(--text);font-size:14px">
-              <option>选题</option><option>金句</option><option>素材</option><option>随想</option>
-            </select>
-            <input class="todo-input" id="writeInput" placeholder="一个灵感、一句话、一个选题..." onkeydown="if(event.key==='Enter')addWriting()">
-            <button class="btn" onclick="addWriting()">收录</button>
+        <!-- 小说 -->
+        <div id="writing-novel">
+          <p class="panel-intro">按「主题」管理小说构思。一个主题就是一本小说。</p>
+          <div class="todo-card">
+            <div class="todo-head"><span class="todo-title">选择或创建小说主题</span></div>
+            <div class="todo-input-wrap">
+              <input class="todo-input" id="novelTopicInput" placeholder="如：公路求生 / 修仙日常 / 悬疑短篇集..." onkeydown="if(event.key==='Enter')addNovelTopic()">
+              <button class="btn" onclick="addNovelTopic()">新建</button>
+            </div>
+            <div id="novelTopicList" style="margin-top:8px"><div class="empty">还没有小说主题，创建一个吧</div></div>
+          </div>
+
+          <div id="novelTopicView" style="display:none">
+            <div class="detail-header" style="margin-bottom:16px">
+              <div class="back-btn" onclick="switchWritingTab('novel')">←</div>
+              <div class="detail-title" id="novelCurrentTopic"></div>
+            </div>
+            <div class="todo-card">
+              <div class="todo-head"><span class="todo-title">添加构思</span></div>
+              <div style="display:flex;gap:10px;margin-bottom:12px">
+                <select id="novelIdeaTag" style="width:auto;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:10px 12px;color:var(--text);font-size:14px">
+                  <option>灵感</option><option>构想</option><option>人物</option><option>世界观</option><option>情节</option><option>其他</option>
+                </select>
+                <input class="todo-input" id="novelIdeaInput" placeholder="一个想法、一个场景、一个人物..." onkeydown="if(event.key==='Enter')addNovelIdea()">
+                <button class="btn" onclick="addNovelIdea()">收录</button>
+              </div>
+            </div>
+            <div id="novelIdeaList"></div>
           </div>
         </div>
 
-        <div class="note-list" id="writingList"><div class="empty">还没有写作灵感</div></div>
+        <!-- 公众号 -->
+        <div id="writing-wechat" style="display:none">
+          <p class="panel-intro">公众号选题、大纲、成稿管理。</p>
+          <div class="todo-card">
+            <div class="todo-head"><span class="todo-title">新文章</span></div>
+            <div style="display:flex;gap:10px;margin-bottom:12px">
+              <select id="wechatStatus" style="width:auto;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:10px 12px;color:var(--text);font-size:14px">
+                <option>选题</option><option>大纲</option><option>初稿</option><option>待修改</option><option>已发布</option>
+              </select>
+              <input class="todo-input" id="wechatInput" placeholder="文章标题或核心想法..." onkeydown="if(event.key==='Enter')addWechat()">
+              <button class="btn" onclick="addWechat()">添加</button>
+            </div>
+          </div>
+          <div class="note-list" id="wechatList"><div class="empty">还没有公众号文章</div></div>
+        </div>
+      </section>
+
+      <!-- 健康 -->
+      <section class="page" id="page-health">
+        <h1>健康</h1>
+        <p class="panel-intro">身体不适、用药记录。随手记一笔，以后翻出来看。</p>
+
+        <div class="todo-card">
+          <div class="todo-head"><span class="todo-title">新增记录</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div class="field" style="margin:0"><label>类型</label><select id="healthType"><option>症状</option><option>用药</option><option>体检</option><option>其他</option></select></div>
+            <div class="field" style="margin:0"><label>日期（可选，默认今天）</label><input type="date" id="healthDate"></div>
+          </div>
+          <div class="field"><label>内容</label><input id="healthContent" placeholder="如：头疼 / 布洛芬 / 血压偏高" onkeydown="if(event.key==='Enter')addHealth()"></div>
+          <div class="field"><label>备注（可选）</label><input id="healthNote" placeholder="如：饭后服用 / 可能因为没睡好"></div>
+          <button class="btn" style="width:100%" onclick="addHealth()">记录</button>
+        </div>
+
+        <div class="todo-card">
+          <div class="todo-head"><span class="todo-title">历史记录</span></div>
+          <div class="note-list" id="healthList"><div class="empty">还没有健康记录</div></div>
+        </div>
       </section>
 
       <!-- 五年计划 -->
@@ -451,10 +508,10 @@
     const quotes=[
       "先爱自己，再去爱世界。","道阻且长，行则将至。","多思无益，先做一事。","昨天的未来，就是今天。","不要怕，往前冲，错了再改。",
       "你不是懒，你只是还没开始。","完成比完美重要一百倍。","想都是问题，做才是答案。","慢一点没关系，只要在走。","今天的你，已经是最好的自己。",
-      "别等准备好了，先上场。","往前走，别回头问意义。","你不需要很厉害才开始，但你需要开始才很厉害。","焦虑的反义词是具体。","把“我应该”换成“我可以”。",
+      "别等准备好了，先上场。","往前走，别回头问意义。","你不需要很厉害才开始，但你需要开始才很厉害。","焦虑的反义词是具体。","把"我应该"换成"我可以"。",
       "做具体的事，爱具体的人，过好具体的今天。","别小看微小的坚持。","你的未来藏在现在的努力里。","每一次开始，都是对拖延的胜利。","行动是治愈恐惧的良药。",
       "不必光芒万丈，只需始终有光。","别和别人比，和昨天的自己比。","勇敢不是不害怕，是害怕还往前走。","现在种下的，未来都会开花。","你只要负责向前，时间负责证明。",
-      "累的时候，允许自己休息，但不允许自己放弃。","你是自己人生唯一的负责人。","小步快走，胜过原地打转。","今天的努力，是明天的底气。","不是所有日子都发光，但每一天都在蓄力。",
+      "累的时候，允许自己休息，但不允许自己放弃。","你是自己人生唯一的责任人。","小步快走，胜过原地打转。","今天的努力，是明天的底气。","不是所有日子都发光，但每一天都在蓄力。",
       "别怕走得慢，只怕你停下脚步。","把目标变小，把行动变大。","你比你以为的更有力量。","最好的时机是十年前，其次是现在。","专注眼前这一步，远方自会到达。",
       "不要被想象出来的困难吓倒。","你已经比想象中更勇敢了。","给自己一点时间，也给努力一点时间。","不求天天高能，但求日日有进。","每一次选择开始，都值得被庆祝。"
     ];
@@ -483,26 +540,32 @@
     ];
 
     const LS=k=>localStorage.getItem(k)||'';
-    const SS=(k,v)=>localStorage.setItem(k,v);
+    const SS=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){alert('存储空间不足！请清理旧数据或保存到Obsidian。')}};
     const todayStr=()=>new Date().toISOString().slice(0,10);
     const vaultName='梦里星光';
     const obsidianFolder='澜舟的工作台';
 
     function loadData(){
-      let data=JSON.parse(LS('workboard_data')||'{}');
+      let data;
+      try{data=JSON.parse(LS('workboard_data')||'{}')}catch(e){data={}}
       if(!data.todos)data.todos={today:[],pool:[]};
       if(!data.habits)data.habits={};
       if(!data.journal)data.journal={};
-      if(!data.invest)data.invest={records:[],positions:[]};
+      if(!data.invest)data.invest={tasks:[]};
       if(!data.exercise)data.exercise=[];
-      if(!data.writing)data.writing=[];
+      if(!data.writing)data.writing={novel:{topics:{}},wechat:[]};
+      if(!data.health)data.health=[];
       if(!data.fiveyear)data.fiveyear={vision:'',milestones:[],actions:''};
       if(!data.theme)data.theme='theme-purple';
+      // annotations for diary
+      if(!data.diaryAnnos)data.diaryAnnos={};
       return data;
     }
     let data=loadData();
     let currentDetailHabit=null;
-    let calViewDate=new Date();
+    let diaryViewDate=new Date();
+    let writingTab='novel';
+    let currentNovelTopic=null;
 
     document.body.className=data.theme;
 
@@ -523,9 +586,11 @@
 
     function go(page){
       document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-      document.getElementById('page-'+page)?.classList.add('active');
+      const pg=document.getElementById('page-'+page);
+      if(pg)pg.classList.add('active');
       document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-      document.querySelector('.nav-item[data-page="'+page+'"]')?.classList.add('active');
+      const nav=document.querySelector('.nav-item[data-page="'+page+'"]');
+      if(nav)nav.classList.add('active');
       document.getElementById('sidebar').classList.remove('open');
       window.scrollTo(0,0);
       render();
@@ -538,19 +603,19 @@
 
       const todayH=data.habits[todayStr()]||{};
 
-      // 习惯渲染
+      // 习惯
       const hl=document.getElementById('habitList');
       hl.innerHTML=habits.map(h=>{
         const done=!!todayH[h.id];
         return '<div class="habit '+(done?'done':'')+'" onclick="openDetail(\''+h.id+'\')">'+
-          '<div class="habit-check">✓</div>'+
-          '<div class="habit-head"><div class="habit-icon">'+h.icon+'</div><div><div class="habit-title">'+h.title+'</div><div class="habit-desc">'+(done?'已完成':'点进去记录详情')+'</div></div></div>'+
+          '<div class="habit-check">'+(done?'✓':'')+'</div>'+
+          '<div class="habit-head"><div class="habit-icon">'+h.icon+'</div><div><div class="habit-title">'+h.title+'</div><div class="habit-desc">'+(done?'已完成 ✓':'点进去记录详情')+'</div></div></div>'+
         '</div>';
       }).join('');
 
       // 待办
-      renderTodos('today',data.todos.today,'todayList','todayInput');
-      renderTodos('pool',data.todos.pool,'poolList','poolInput');
+      renderTodos('today',data.todos.today,'todayList');
+      renderTodos('pool',data.todos.pool,'poolList');
 
       // 统计
       const doneTodos=data.todos.today.filter(t=>t.done).length;
@@ -563,11 +628,13 @@
       // 迷你日历
       renderMiniCal();
 
-      // 日记
-      document.getElementById('autoReview').innerHTML=generateReview().replace(/\n/g,'<br>');
-      document.getElementById('journal').value=data.journal[todayStr()]||'';
-      document.getElementById('journalCount').textContent=(data.journal[todayStr()]||'').length+' 字';
-      renderCalendar();
+      // 日记（根据 diaryViewDate）
+      const dv=diaryViewDate.toISOString().slice(0,10);
+      document.getElementById('diaryDateLabel').textContent=dv===todayStr()?'今天':dv;
+      document.getElementById('autoReview').innerHTML=generateReview(dv).replace(/\n/g,'<br>');
+      document.getElementById('journal').value=data.journal[dv]||'';
+      document.getElementById('journalCount').textContent=(data.journal[dv]||'').length+' 字';
+      renderDiaryAnnos(dv);
 
       // 投资
       renderInvest();
@@ -578,14 +645,20 @@
       // 写作
       renderWriting();
 
+      // 健康
+      renderHealth();
+
       // 五年
       document.getElementById('fyVision').value=data.fiveyear.vision;
       document.getElementById('fyActions').value=data.fiveyear.actions;
+      if(document.getElementById('fyVision'))document.getElementById('fyVision').value=data.fiveyear.vision||'';
+      if(document.getElementById('fyActions'))document.getElementById('fyActions').value=data.fiveyear.actions||'';
       renderFiveYear();
     }
 
-    function renderTodos(type,list,listId,inputId){
+    function renderTodos(type,list,listId){
       const el=document.getElementById(listId);
+      if(!el)return;
       if(!list.length){el.innerHTML='<div class="empty">'+ (type==='today'?'今天还没有待办，加一条吧':'计划池是空的，把想做但不必今天做的事丢进来') +'</div>';return;}
       el.innerHTML=list.map((t,i)=>{
         return '<div class="todo-item '+(t.done?'done':'')+'">'+
@@ -597,11 +670,10 @@
     }
     function addTodo(type){
       const id=type==='today'?'todayInput':'poolInput';
-      const v=document.getElementById(id).value.trim();
-      if(!v)return;
-      data.todos[type].push({text:v,done:false});
-      document.getElementById(id).value='';
-      save();
+      const el=document.getElementById(id);
+      if(!el)return;
+      const v=el.value.trim();if(!v)return;
+      data.todos[type].push({text:v,done:false});el.value='';save();
     }
     function toggleTodo(type,i){data.todos[type][i].done=!data.todos[type][i].done;save();}
     function delTodo(type,i){data.todos[type].splice(i,1);save();}
@@ -649,7 +721,6 @@
         record[f.key]=el?el.value:'';
       });
       data.habits[k][currentDetailHabit.id]=record;
-      // 运动习惯同步到运动面板
       if(currentDetailHabit.id==='exercise'){
         const type=record.type||'运动';
         const min=parseInt(record.duration)||0;
@@ -663,11 +734,11 @@
 
     // 迷你日历
     function renderMiniCal(){
+      const el=document.getElementById('miniCalGrid');
+      if(!el)return;
       const now=new Date(),y=now.getFullYear(),m=now.getMonth();
-      const first=new Date(y,m,1),last=new Date(y,m+1,0);
-      const startDay=first.getDay();
-      const days=last.getDate();
-      const tstr=todayStr();
+      const first=new Date(y,m,1),startDay=first.getDay(),last=new Date(y,m+1,0);
+      const days=last.getDate(),tstr=todayStr();
       let html='';
       for(let i=0;i<startDay;i++)html+='<div class="mini-cal-cell"></div>';
       for(let d=1;d<=days;d++){
@@ -682,156 +753,137 @@
         else cls+=' missed';
         html+='<div class="'+cls+'">'+d+'</div>';
       }
-      document.getElementById('miniCalGrid').innerHTML=html;
+      el.innerHTML=html;
     }
 
-    // 日历
-    function renderCalendar(){
-      const y=calViewDate.getFullYear(),m=calViewDate.getMonth();
-      document.getElementById('calMonth').textContent=y+'年'+(m+1)+'月';
-      const first=new Date(y,m,1),last=new Date(y,m+1,0);
-      const startDay=first.getDay();
-      const days=last.getDate();
-      const names=['日','一','二','三','四','五','六'];
-      let html=names.map(n=>'<div class="cal-day-name">'+n+'</div>').join('');
-      for(let i=0;i<startDay;i++)html+='<div class="cal-cell"></div>';
-      const tstr=todayStr();
-      for(let d=1;d<=days;d++){
-        const ds=y+'-'+(m+1).toString().padStart(2,'0')+'-'+d.toString().padStart(2,'0');
-        const h=data.habits[ds]||{};
-        const doneN=habits.filter(x=>h[x.id]).length;
-        let cls='cal-cell';
-        if(ds===tstr)cls+=' today';
-        if(ds>tstr)cls+=' future';
-        else if(doneN===habits.length&&doneN>0)cls+=' done';
-        else if(doneN>0)cls+=' partial';
-        else cls+=' missed';
-        html+='<div class="'+cls+'">'+d+'</div>';
-      }
-      document.getElementById('calGrid').innerHTML=html;
+    // 日记导航
+    function navDiary(delta){
+      if(delta===0){diaryViewDate=new Date();render();return;}
+      diaryViewDate.setDate(diaryViewDate.getDate()+delta);
+      render();
     }
-    function changeMonth(delta){calViewDate.setMonth(calViewDate.getMonth()+delta);renderCalendar();}
+    function pickDate(){
+      const dv=diaryViewDate.toISOString().slice(0,10);
+      const d=prompt('输入日期（YYYY-MM-DD）：',dv);
+      if(d&&/^\d{4}-\d{2}-\d{2}$/.test(d)){
+        diaryViewDate=new Date(d);
+        render();
+      }
+    }
+
+    // 日记批注
+    function addDiaryAnno(){
+      const el=document.getElementById('diaryAnnoInput');
+      if(!el)return;
+      const v=el.value.trim();if(!v)return;
+      const k=diaryViewDate.toISOString().slice(0,10);
+      if(!data.diaryAnnos[k])data.diaryAnnos[k]=[];
+      data.diaryAnnos[k].push({text:v,date:k,time:new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})});
+      el.value='';save();
+    }
+    function delDiaryAnno(date,i){
+      if(!data.diaryAnnos[date])return;
+      data.diaryAnnos[date].splice(i,1);
+      if(!data.diaryAnnos[date].length)delete data.diaryAnnos[date];
+      save();
+    }
+    function renderDiaryAnnos(k){
+      const el=document.getElementById('diaryAnnos');
+      if(!el)return;
+      const annos=data.diaryAnnos[k]||[];
+      el.innerHTML=annos.map((a,i)=>
+        '<div class="anno-item"><span class="anno-date">'+a.time+'</span><span class="anno-text">'+escapeHtml(a.text)+'</span><span class="anno-del" onclick="delDiaryAnno(\''+k+'\','+i+')">×</span></div>'
+      ).join('');
+    }
 
     // 复盘
-    function generateReview(){
-      const k=todayStr();
-      const h=data.habits[k]||{};
-      const todos=data.todos.today||[];
-      let md='# 今日复盘\n\n';
-      md+='**日期：** '+k+'\n\n';
-      md+='## 已完成待办\n';
-      const doneT=todos.filter(t=>t.done);
-      if(doneT.length)md+=doneT.map(t=>'- [x] '+t.text).join('\n')+'\n\n';
+    function generateReview(ds){
+      const h=data.habits[ds]||{};
+      const todos_ds=ds===todayStr()?data.todos.today:[];
+      const pool=data.todos.pool||[];
+      let md='**日期：** '+ds+'\n\n';
+      md+='**已完成待办**\n';
+      const doneT=todos_ds.filter(t=>t.done);
+      if(doneT.length)md+=doneT.map(t=>'- ✓ '+t.text).join('\n')+'\n\n';
       else md+='- 今天还没有完成待办\n\n';
-      md+='## 未完成待办\n';
-      const unT=todos.filter(t=>!t.done);
-      if(unT.length)md+=unT.map(t=>'- [ ] '+t.text).join('\n')+'\n\n';
+      md+='**未完成待办**\n';
+      const unT=todos_ds.filter(t=>!t.done);
+      if(unT.length)md+=unT.map(t=>'- ☐ '+t.text).join('\n')+'\n\n';
       else md+='- 今日待办全部完成\n\n';
-      md+='## 习惯打卡\n';
+      md+='**习惯打卡**\n';
       habits.forEach(x=>{
         const r=h[x.id];
         md+='- '+(r?'✅':'⬜')+' '+x.title;
         if(r){
-          const details=x.fields.map(f=>f.key).filter(key=>r[key]).map(key=>{
-            const label=x.fields.find(f=>f.key===key).label;
-            return label+'：'+r[key];
-          }).join('，');
+          const details=x.fields.map(f=>f.key).filter(key=>r[key]).map(key=>r[key]).join('，');
           if(details)md+='（'+details+'）';
         }
         md+='\n';
       });
-      md+='\n## 一句话小结\n';
+      md+='\n**一句话小结**\n';
       const doneScore=doneT.length+habits.filter(x=>h[x.id]).length;
-      const totalScore=todos.length+habits.length;
+      const totalScore=todos_ds.length+habits.length;
       if(totalScore===0)md+='今天还没有记录，先从一件小事开始吧。';
       else if(doneScore===totalScore)md+='今天全部完成，给自己一点肯定。';
       else if(doneScore>=totalScore/2)md+='完成了一大半，剩下的不必苛责自己。';
       else md+='今天起步有点慢，但开始本身就是胜利。';
       return md;
     }
-    function saveJournal(){data.journal[todayStr()]=document.getElementById('journal').value;save();}
-
-    // Obsidian
-    function buildMarkdown(){
-      const k=todayStr();
-      let md='# 工作台日志：'+k+'\n\n';
-      md+=generateReview()+'\n\n---\n\n';
-      md+='## 今日速记\n\n'+(data.journal[k]||'（空）')+'\n\n';
-
-      // 投资
-      md+='---\n\n## 投资记录\n\n';
-      const todayInv=data.invest.records.filter(r=>r.date===k);
-      if(todayInv.length){
-        todayInv.forEach(r=>{
-          md+='- **'+r.type+'**'+(r.target?'「'+r.target+'」':'')+'：'+r.content+'\n';
-        });
-      }else md+='- 今天没有投资记录\n';
-      if(data.invest.positions.length){
-        md+='\n**持仓备忘：**\n'+data.invest.positions.map(p=>'- '+p).join('\n')+'\n';
-      }
-      md+='\n';
-
-      // 运动
-      md+='---\n\n## 运动记录\n\n';
-      const todayEx=data.exercise.filter(e=>e.date===k);
-      if(todayEx.length)todayEx.forEach(e=>md+='- '+e.type+' '+e.duration+'分钟'+(e.note?'（'+e.note+'）':'')+'\n');
-      else md+='- 今天还没有运动记录\n';
-      md+='\n';
-
-      // 写作
-      md+='---\n\n## 写作灵感\n\n';
-      const todayWr=data.writing.filter(w=>w.date===k);
-      if(todayWr.length)todayWr.forEach(w=>md+='- **'+w.tag+'**：'+w.text+'\n');
-      else md+='- 今天没有收录灵感\n';
-      md+='\n';
-
-      // 五年计划
-      md+='---\n\n## 五年计划\n\n**愿景：** '+(data.fiveyear.vision||'未填写')+'\n\n';
-      if(data.fiveyear.milestones.length)md+='**年度里程碑：**\n'+data.fiveyear.milestones.map(m=>'- '+(m.done?'[x] ':'[ ] ')+m.text).join('\n')+'\n\n';
-      md+='**本季度重点行动：**\n'+(data.fiveyear.actions||'未填写')+'\n';
-
-      return md;
-    }
-    function saveToObsidian(){
-      const md=buildMarkdown();
-      const k=todayStr();
-      const filePath=obsidianFolder+'/'+k;
-      // Advanced URI: overwrite mode
-      const url='obsidian://advanced-uri?vault='+encodeURIComponent(vaultName)+'&filepath='+encodeURIComponent(filePath)+'&data='+encodeURIComponent(md)+'&mode=overwrite';
-      window.location.href=url;
-    }
-    function copyMarkdown(){
-      navigator.clipboard.writeText(buildMarkdown()).then(()=>alert('Markdown 已复制'));
+    function saveJournal(){
+      const el=document.getElementById('journal');
+      if(!el)return;
+      const k=diaryViewDate.toISOString().slice(0,10);
+      data.journal[k]=el.value;save();
     }
 
-    // 投资
-    function addInvest(){
-      const type=document.getElementById('invType').value;
-      const target=document.getElementById('invTarget').value.trim();
-      const content=document.getElementById('invContent').value.trim();
-      if(!content)return;
-      data.invest.records.push({date:todayStr(),type,target,content,ts:Date.now()});
-      document.getElementById('invTarget').value='';document.getElementById('invContent').value='';save();
+    // 投资（待办+批注）
+    function addInvestTask(){
+      const el=document.getElementById('invTaskInput');
+      if(!el)return;
+      const v=el.value.trim();if(!v)return;
+      data.invest.tasks.push({text:v,done:false,date:todayStr(),annotations:[],ts:Date.now()});
+      el.value='';save();
     }
-    function addPosition(){
-      const v=document.getElementById('positionInput').value.trim();if(!v)return;
-      data.invest.positions.push(v);document.getElementById('positionInput').value='';save();
+    function toggleInvestTask(i){data.invest.tasks[i].done=!data.invest.tasks[i].done;save();}
+    function delInvestTask(i){data.invest.tasks.splice(i,1);save();}
+    function addInvestAnno(i){
+      const el=document.getElementById('invAnno_'+i);
+      if(!el)return;
+      const v=el.value.trim();if(!v)return;
+      const now=new Date();
+      if(!data.invest.tasks[i].annotations)data.invest.tasks[i].annotations=[];
+      data.invest.tasks[i].annotations.push({
+        text:v,
+        date:now.toISOString().slice(0,10),
+        time:now.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})
+      });
+      el.value='';save();
     }
-    function togglePosition(){
-      const c=document.getElementById('positionCard');
-      c.style.display=c.style.display==='none'?'block':'none';
+    function delInvestAnno(taskIdx,annoIdx){
+      data.invest.tasks[taskIdx].annotations.splice(annoIdx,1);save();
     }
     function renderInvest(){
-      const il=document.getElementById('investList');
-      const list=data.invest.records.slice().reverse();
-      il.innerHTML=list.length?list.map((r,i)=>'<div class="note-item"><span style="display:inline-block;padding:2px 8px;border-radius:10px;background:'+(r.type==='已执行操作'?'var(--green)':'var(--yellow)')+';color:'+(r.type==='已执行操作'?'#fff':'#000')+';font-size:11px;margin-right:8px">'+r.type+'</span>'+(r.target?'<b>'+escapeHtml(r.target)+'</b> · ':'')+escapeHtml(r.content)+'<div class="note-time">'+r.date+' <span style="cursor:pointer;color:var(--red)" onclick="delInvest('+i+')">删除</span></div></div>').join(''):'<div class="empty">还没有投资记录</div>';
-      const pl=document.getElementById('positionList');
-      pl.innerHTML=data.invest.positions.length?data.invest.positions.map((p,i)=>'<div class="note-item">'+escapeHtml(p)+'<div class="note-time" style="cursor:pointer;color:var(--red)" onclick="delPosition('+i+')">删除</div></div>').join(''):'<div class="empty">暂无持仓</div>';
+      const el=document.getElementById('investTaskList');
+      if(!el)return;
+      const list=data.invest.tasks.slice().reverse();
+      el.innerHTML=list.length?list.map((t,i)=>{
+        const idx=data.invest.tasks.length-1-i;
+        const annos=t.annotations||[];
+        return '<div style="background:var(--elev);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:10px">'+
+          '<div class="todo-item '+(t.done?'done':'')+'" style="background:transparent;padding:6px 0">'+
+            '<div class="todo-check" onclick="toggleInvestTask('+idx+')">'+(t.done?'✓':'')+'</div>'+
+            '<div class="todo-text">'+escapeHtml(t.text)+'</div>'+
+            '<div class="todo-del" onclick="delInvestTask('+idx+')">×</div>'+
+          '</div>'+
+          (annos.length?annos.map((a,j)=>
+            '<div class="anno-item"><span class="anno-date">'+a.date+'</span><span class="anno-text">'+escapeHtml(a.text)+'</span><span class="anno-del" onclick="delInvestAnno('+idx+','+j+')">×</span></div>'
+          ).join(''):'')+
+          '<input class="anno-input" style="margin:6px 0 0 0" id="invAnno_'+idx+'" placeholder="添加批注..." onkeydown="if(event.key===\'Enter\'){addInvestAnno('+idx+');event.preventDefault()}">'+
+          '<div class="anno-btn-wrap"><button class="btn btn-sm btn-text" onclick="addInvestAnno('+idx+')">批注</button></div>'+
+          '<div class="note-time" style="margin-top:4px">'+t.date+'</div>'+
+        '</div>';
+      }).join(''):'<div class="empty">还没有投资任务，加一个吧</div>';
     }
-    function delInvest(i){
-      const list=data.invest.records.slice().reverse();const item=list[i];const idx=data.invest.records.indexOf(item);if(idx>-1)data.invest.records.splice(idx,1);save();
-    }
-    function delPosition(i){data.invest.positions.splice(i,1);save();}
 
     // 运动
     function addExercise(){
@@ -846,62 +898,217 @@
       const k=todayStr();
       const todayEx=data.exercise.filter(e=>e.date===k);
       const el=document.getElementById('exList');
-      el.innerHTML=todayEx.length?todayEx.map((e,i)=>'<div class="note-item"><b>'+e.type+'</b> · '+e.duration+'分钟'+(e.note?' · '+escapeHtml(e.note):'')+'<div class="note-time" style="cursor:pointer;color:var(--red)" onclick="delExercise('+i+')">删除</div></div>').join(''):'<div class="empty">今天还没有运动记录</div>';
+      if(el)el.innerHTML=todayEx.length?todayEx.map(e=>'<div class="note-item"><b>'+e.type+'</b> · '+e.duration+'分钟'+(e.note?' · '+escapeHtml(e.note):'')+'</div>').join(''):'<div class="empty">今天还没有运动记录</div>';
       const now=new Date();const day=now.getDay()||7;const mon=new Date(now);mon.setDate(now.getDate()-day+1);mon.setHours(0,0,0,0);
       const week=data.exercise.filter(e=>new Date(e.date)>=mon);
       const weekMin=week.reduce((a,b)=>a+b.duration,0);
-      document.getElementById('exWeekCount').textContent=week.length+' 次';
-      document.getElementById('exWeekMin').textContent=weekMin+' 分';
-      document.getElementById('exStreak').textContent='待设计';
-    }
-    function delExercise(i){
-      const k=todayStr();let c=0;for(let j=0;j<data.exercise.length;j++){if(data.exercise[j].date===k){if(c===i){data.exercise.splice(j,1);break;}c++;}}save();
+      const ew=document.getElementById('exWeekCount');if(ew)ew.textContent=week.length+' 次';
+      const em=document.getElementById('exWeekMin');if(em)em.textContent=weekMin+' 分';
     }
 
     // 写作
-    let writingFilter='全部';
-    function filterWriting(tag){writingFilter=tag;document.querySelectorAll('#writingTags .tag').forEach(t=>t.classList.toggle('active',t.dataset.tag===tag));renderWriting();}
-    function addWriting(){
-      const tag=document.getElementById('writeTag').value;
-      const v=document.getElementById('writeInput').value.trim();if(!v)return;
-      data.writing.push({tag:tag,text:v,date:todayStr(),ts:Date.now()});
-      document.getElementById('writeInput').value='';save();
+    function switchWritingTab(tab){
+      writingTab=tab;
+      currentNovelTopic=null;
+      document.querySelectorAll('#page-writing .tab').forEach(t=>t.classList.toggle('active',false));
+      document.querySelectorAll('#page-writing .tab').forEach(t=>{
+        if(t.textContent.includes(tab==='novel'?'小说':'公众号'))t.classList.add('active');
+      });
+      document.getElementById('writing-novel').style.display=tab==='novel'?'block':'none';
+      document.getElementById('writing-wechat').style.display=tab==='wechat'?'block':'none';
+      if(tab==='novel')renderNovelTopics();
+      else renderWechat();
+    }
+    function addNovelTopic(){
+      const el=document.getElementById('novelTopicInput');if(!el)return;
+      const v=el.value.trim();if(!v)return;
+      if(!data.writing.novel.topics[v])data.writing.novel.topics[v]=[];
+      el.value='';save();
+    }
+    function selectNovelTopic(topic){
+      currentNovelTopic=topic;
+      document.getElementById('novelTopicList').parentElement.style.display='none';
+      document.getElementById('novelTopicView').style.display='block';
+      document.getElementById('novelCurrentTopic').textContent='📖 '+topic;
+      renderNovelIdeas();
+    }
+    function addNovelIdea(){
+      if(!currentNovelTopic)return;
+      const tag=document.getElementById('novelIdeaTag').value;
+      const el=document.getElementById('novelIdeaInput');if(!el)return;
+      const v=el.value.trim();if(!v)return;
+      if(!data.writing.novel.topics[currentNovelTopic])data.writing.novel.topics[currentNovelTopic]=[];
+      data.writing.novel.topics[currentNovelTopic].push({tag:tag,text:v,date:todayStr(),ts:Date.now()});
+      el.value='';save();
+    }
+    function delNovelIdea(topic,i){data.writing.novel.topics[topic].splice(i,1);save();}
+    function delNovelTopic(topic){delete data.writing.novel.topics[topic];if(currentNovelTopic===topic){currentNovelTopic=null;document.getElementById('novelTopicView').style.display='none';}save();}
+    function renderNovelTopics(){
+      const el=document.getElementById('novelTopicList');
+      if(!el)return;
+      const topics=Object.keys(data.writing.novel.topics);
+      if(!topics.length){el.innerHTML='<div class="empty">还没有小说主题，创建一个吧</div>';return;}
+      el.innerHTML=topics.map(t=>'<div class="topic-card" onclick="selectNovelTopic(\''+escapeHtml(t).replace(/'/g,"&#39;")+'\')"><h4>📖 '+escapeHtml(t)+'</h4><p>'+(data.writing.novel.topics[t]||[]).length+' 条构思</p><span class="todo-del" style="position:absolute;right:12px;top:12px" onclick="event.stopPropagation();delNovelTopic(\''+escapeHtml(t).replace(/'/g,"&#39;")+'\')">×</span></div>').join('');
+    }
+    function renderNovelIdeas(){
+      const el=document.getElementById('novelIdeaList');
+      if(!el)return;
+      const ideas=data.writing.novel.topics[currentNovelTopic]||[];
+      el.innerHTML=ideas.length?ideas.slice().reverse().map((idea,i)=>{
+        const idx=ideas.length-1-i;
+        return '<div class="topic-item"><span class="tag-label">'+idea.tag+'</span>'+escapeHtml(idea.text)+'<div class="note-time">'+idea.date+' <span style="cursor:pointer;color:var(--red)" onclick="delNovelIdea(\''+escapeHtml(currentNovelTopic).replace(/'/g,"&#39;")+'\','+idx+')">删除</span></div></div>';
+      }).join(''):'<div class="empty">还没有构思，写点什么吧</div>';
     }
     function renderWriting(){
-      const list=writingFilter==='全部'?data.writing:data.writing.filter(w=>w.tag===writingFilter);
-      const wl=document.getElementById('writingList');
-      wl.innerHTML=list.length?list.slice().reverse().map((w,i)=>'<div class="note-item"><span style="display:inline-block;padding:2px 8px;border-radius:10px;background:var(--accent);color:#fff;font-size:11px;margin-right:8px">'+w.tag+'</span>'+escapeHtml(w.text)+'<div class="note-time">'+w.date+' <span style="cursor:pointer;color:var(--red)" onclick="delWriting('+i+')">删除</span></div></div>').join(''):'<div class="empty">还没有写作灵感</div>';
+      if(writingTab==='novel'){
+        document.getElementById('writing-novel').style.display='block';
+        document.getElementById('writing-wechat').style.display='none';
+        if(currentNovelTopic){renderNovelIdeas();}
+        else{renderNovelTopics();document.getElementById('novelTopicView').style.display='none';document.getElementById('novelTopicList').parentElement.style.display='block';}
+      }else{
+        document.getElementById('writing-novel').style.display='none';
+        document.getElementById('writing-wechat').style.display='block';
+        renderWechat();
+      }
     }
-    function delWriting(i){
-      const list=writingFilter==='全部'?data.writing:data.writing.filter(w=>w.tag===writingFilter);
-      const item=list[list.length-1-i];const idx=data.writing.indexOf(item);if(idx>-1)data.writing.splice(idx,1);save();
+
+    // 公众号
+    function addWechat(){
+      const status=document.getElementById('wechatStatus').value;
+      const el=document.getElementById('wechatInput');if(!el)return;
+      const v=el.value.trim();if(!v)return;
+      data.writing.wechat.push({status:status,text:v,date:todayStr(),ts:Date.now()});
+      el.value='';save();
+    }
+    function delWechat(i){
+      const list=data.writing.wechat.slice().reverse();
+      const item=list[i];
+      const idx=data.writing.wechat.indexOf(item);
+      if(idx>-1)data.writing.wechat.splice(idx,1);
+      save();
+    }
+    function renderWechat(){
+      const el=document.getElementById('wechatList');
+      if(!el)return;
+      const list=data.writing.wechat.slice().reverse();
+      el.innerHTML=list.length?list.map((w,i)=>{
+        const colors={选题:'var(--accent2)',大纲:'var(--yellow)',初稿:'var(--green)',待修改:'var(--orange)',已发布:'var(--accent)'};
+        return '<div class="note-item"><span style="display:inline-block;padding:2px 8px;border-radius:10px;background:'+(colors[w.status]||'var(--accent)')+';font-size:11px;margin-right:8px;color:'+(w.status==='大纲'||w.status==='待修改'?'#000':'#fff')+'">'+w.status+'</span>'+escapeHtml(w.text)+'<div class="note-time">'+w.date+' <span style="cursor:pointer;color:var(--red)" onclick="delWechat('+i+')">删除</span></div></div>';
+      }).join(''):'<div class="empty">还没有公众号文章</div>';
+    }
+
+    // 健康
+    function addHealth(){
+      const type=document.getElementById('healthType').value;
+      const dateEl=document.getElementById('healthDate');
+      const date=dateEl.value||todayStr();
+      const content=document.getElementById('healthContent').value.trim();
+      const note=document.getElementById('healthNote').value.trim();
+      if(!content)return;
+      data.health.push({date:date,type:type,content:content,note:note,ts:Date.now()});
+      document.getElementById('healthContent').value='';document.getElementById('healthNote').value='';
+      save();
+    }
+    function delHealth(i){
+      const list=data.health.slice().reverse();
+      const item=list[i];
+      const idx=data.health.indexOf(item);
+      if(idx>-1)data.health.splice(idx,1);
+      save();
+    }
+    function renderHealth(){
+      const el=document.getElementById('healthList');
+      if(!el)return;
+      const list=data.health.slice().reverse();
+      el.innerHTML=list.length?list.map((h,i)=>'<div class="health-item"><span class="h-type '+(h.type==='症状'?'symptom':h.type==='用药'?'med':'')+'" style="background:'+(h.type==='症状'?'var(--yellow)':h.type==='用药'?'var(--accent)':'var(--elev)')+';color:'+(h.type==='症状'?'#000':'#fff')+'">'+h.type+'</span><span>'+escapeHtml(h.content)+'</span>'+(h.note?'<div style="font-size:12px;color:var(--sub);margin-top:4px">'+escapeHtml(h.note)+'</div>':'')+'<div class="h-date">'+h.date+' <span style="cursor:pointer;color:var(--red)" onclick="delHealth('+i+')">删除</span></div></div>').join(''):'<div class="empty">还没有健康记录</div>';
     }
 
     // 五年计划
-    function saveFiveYear(){data.fiveyear.vision=document.getElementById('fyVision').value;data.fiveyear.actions=document.getElementById('fyActions').value;save();}
+    function saveFiveYear(){
+      const v=document.getElementById('fyVision');
+      const a=document.getElementById('fyActions');
+      if(v)data.fiveyear.vision=v.value;
+      if(a)data.fiveyear.actions=a.value;
+      save();
+    }
     function addFiveYear(){
-      const v=document.getElementById('fyInput').value.trim();if(!v)return;
-      data.fiveyear.milestones.push({text:v,done:false});document.getElementById('fyInput').value='';save();
+      const el=document.getElementById('fyInput');if(!el)return;
+      const v=el.value.trim();if(!v)return;
+      data.fiveyear.milestones.push({text:v,done:false});el.value='';save();
     }
     function renderFiveYear(){
-      const fl=document.getElementById('fyList');
-      fl.innerHTML=data.fiveyear.milestones.length?data.fiveyear.milestones.map((m,i)=>'<div class="todo-item '+(m.done?'done':'')+'"><div class="todo-check" onclick="toggleFy('+i+')">'+(m.done?'✓':'')+'</div><div class="todo-text">'+escapeHtml(m.text)+'</div><div class="todo-del" onclick="delFy('+i+')">×</div></div>').join(''):'<div class="empty">还没有里程碑</div>';
-      document.getElementById('fyTotal').textContent=data.fiveyear.milestones.length;
-      document.getElementById('fyQuarter').textContent=data.fiveyear.milestones.filter(m=>m.done).length;
-      document.getElementById('fyMonth').textContent=0;
+      const el=document.getElementById('fyList');
+      if(!el)return;
+      el.innerHTML=data.fiveyear.milestones.length?data.fiveyear.milestones.map((m,i)=>'<div class="todo-item '+(m.done?'done':'')+'"><div class="todo-check" onclick="toggleFy('+i+')">'+(m.done?'✓':'')+'</div><div class="todo-text">'+escapeHtml(m.text)+'</div><div class="todo-del" onclick="delFy('+i+')">×</div></div>').join(''):'<div class="empty">还没有里程碑</div>';
+      const ft=document.getElementById('fyTotal');if(ft)ft.textContent=data.fiveyear.milestones.length;
+      const fq=document.getElementById('fyQuarter');if(fq)fq.textContent=data.fiveyear.milestones.filter(m=>m.done).length;
     }
     function toggleFy(i){data.fiveyear.milestones[i].done=!data.fiveyear.milestones[i].done;save();}
     function delFy(i){data.fiveyear.milestones.splice(i,1);save();}
+
+    // Obsidian
+    function buildMarkdown(){
+      const k=todayStr();
+      let md='# 工作台日志：'+k+'\n\n';
+      md+=generateReview(k)+'\n\n---\n\n';
+      md+='## 今日速记\n\n'+(data.journal[k]||'（空）')+'\n\n';
+
+      md+='---\n\n## 投资记录\n\n';
+      const tasks=data.invest.tasks.filter(t=>t.date===k);
+      if(tasks.length){
+        tasks.forEach(t=>{
+          md+='- '+(t.done?'[x]':'[ ]')+' '+t.text+'\n';
+          (t.annotations||[]).forEach(a=>{md+='  - 💬 ['+a.date+'] '+a.text+'\n'});
+        });
+      }else md+='- 今天没有投资记录\n';
+      md+='\n';
+
+      md+='---\n\n## 运动记录\n\n';
+      const todayEx=data.exercise.filter(e=>e.date===k);
+      if(todayEx.length)todayEx.forEach(e=>md+='- '+e.type+' '+e.duration+'分钟'+(e.note?'（'+e.note+'）':'')+'\n');
+      else md+='- 今天还没有运动记录\n';
+      md+='\n';
+
+      md+='---\n\n## 写作\n\n';
+      md+='### 小说\n';
+      const todayNovel=[];
+      Object.keys(data.writing.novel.topics).forEach(topic=>{
+        (data.writing.novel.topics[topic]||[]).forEach(idea=>{
+          if(idea.date===k)todayNovel.push('**'+topic+'** - '+idea.tag+'：'+idea.text);
+        });
+      });
+      md+=todayNovel.length?todayNovel.map(x=>'- '+x).join('\n')+'\n\n':'- 今天没有小说构思\n\n';
+      md+='### 公众号\n';
+      const todayWc=data.writing.wechat.filter(w=>w.date===k);
+      md+=todayWc.length?todayWc.map(w=>'- '+w.status+'：'+w.text).join('\n')+'\n\n':'- 今天没有公众号记录\n\n';
+
+      md+='---\n\n## 健康记录\n\n';
+      const todayHl=data.health.filter(h=>h.date===k);
+      if(todayHl.length)todayHl.forEach(h=>md+='- '+h.type+'：'+h.content+(h.note?'（'+h.note+'）':'')+'\n');
+      else md+='- 今天没有健康记录\n';
+      md+='\n';
+
+      md+='---\n\n## 五年计划\n\n**愿景：** '+(data.fiveyear.vision||'未填写')+'\n\n';
+      if(data.fiveyear.milestones.length)md+='**年度里程碑：**\n'+data.fiveyear.milestones.map(m=>'- '+(m.done?'[x] ':'[ ] ')+m.text).join('\n')+'\n\n';
+      md+='**本季度重点行动：**\n'+(data.fiveyear.actions||'未填写')+'\n';
+
+      return md;
+    }
+    function saveToObsidian(){
+      const md=buildMarkdown();
+      const k=todayStr();
+      const filePath=obsidianFolder+'/'+k;
+      const url='obsidian://advanced-uri?vault='+encodeURIComponent(vaultName)+'&filepath='+encodeURIComponent(filePath)+'&data='+encodeURIComponent(md)+'&mode=overwrite';
+      window.location.href=url;
+    }
+    function copyMarkdown(){navigator.clipboard.writeText(buildMarkdown()).then(()=>alert('Markdown 已复制！到 Obsidian 里粘贴即可覆盖当天笔记。'));}
 
     // 皮肤
     function openTheme(){document.getElementById('themeModal').classList.add('show');}
     function closeTheme(){document.getElementById('themeModal').classList.remove('show');}
     function setTheme(theme){
       data.theme=theme;document.body.className=theme;
-      const colors={
-        'theme-purple':'#0f0f12','theme-minimal':'#f8f9fa','theme-forest':'#0d1f17',
-        'theme-sakura':'#1f1218','theme-ocean':'#0a1628'
-      };
+      const colors={'theme-purple':'#0f0f12','theme-minimal':'#f8f9fa','theme-forest':'#0d1f17','theme-sakura':'#1f1218','theme-ocean':'#0a1628'};
       document.getElementById('theme-color').setAttribute('content',colors[theme]);
       save();closeTheme();
     }
@@ -913,8 +1120,7 @@
     });
     (function init(){
       const p=location.hash.slice(1)||'home';
-      if(document.getElementById('page-'+p))go(p);
-      else go('home');
+      if(document.getElementById('page-'+p))go(p);else go('home');
       render();
     })();
   </script>
