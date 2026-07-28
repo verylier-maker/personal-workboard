@@ -6,8 +6,8 @@
   <meta name="theme-color" id="theme-color" content="#0f0f12">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="澜舟工作台">
-  <title>澜舟工作台</title>
+  <meta name="apple-mobile-web-app-title" content="澜舟的工作台">
+  <title>澜舟的工作台</title>
   <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoi5rKZ6Iez5bel5L2c5ZGYIiwic2hvcnRfbmFtZSI6IuWtl+iHsSIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGYwZjEyIiwidGhlbWVfY29sb3IiOiIjMGYwZjEyIn0=">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%236c5ce7'/%3E%3Ctext x='50' y='66' font-size='50' text-anchor='middle' fill='white'%3E%F0%9F%8E%AF%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%236c5ce7'/%3E%3Ctext x='90' y='125' font-size='90' text-anchor='middle' fill='white'%3E%F0%9F%8E%AF%3C/text%3E%3C/svg%3E">
@@ -319,7 +319,7 @@
   </div>
   <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()">☰</button>
   <aside id="sidebar">
-    <div class="brand"><span>🎯</span> 澜舟工作台</div>
+    <div class="brand"><span>🎯</span> 澜舟的工作台</div>
     <nav>
       <div class="nav-item active" data-page="home" onclick="go('home')"><span class="nav-icon">🏠</span>首页</div>
       <div class="nav-item" data-page="diary" onclick="go('diary')"><span class="nav-icon">📔</span>日记</div>
@@ -1158,7 +1158,7 @@
     function downloadBackup(){
       const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
       const url=URL.createObjectURL(blob);const a=document.createElement('a');
-      a.href=url;a.download='澜舟工作台_备份_'+getToday()+'.json';document.body.appendChild(a);
+      a.href=url;a.download='澜舟的工作台_备份_'+getToday()+'.json';document.body.appendChild(a);
       a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
       dataModifiedSinceObsidianSave=false;hideReminder();
       data.settings.lastObsidianSave=new Date().toISOString();
