@@ -76,6 +76,19 @@
     .theme-btn:hover,.settings-btn:hover{background:var(--elev)}
     .backup-status{font-size:11px;color:var(--muted);text-align:center;padding:6px 0}
 
+    .sidebar-heatmap{padding:8px 10px;margin:0 8px;border-top:1px solid var(--elev);border-bottom:1px solid var(--elev)}
+    .sidebar-heatmap-title{font-size:11px;color:var(--muted);margin-bottom:6px;text-align:center}
+    .sidebar-heatmap-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;justify-items:center}
+    .sidebar-heatmap-cell{width:11px;height:11px;border-radius:2px;background:transparent;border:1px solid var(--elev)}
+    .sidebar-heatmap-cell.done{background:var(--green);border-color:var(--green)}
+    .sidebar-heatmap-cell.partial{background:var(--yellow);opacity:.7;border-color:var(--yellow)}
+    .sidebar-heatmap-cell.today{box-shadow:inset 0 0 0 1.5px var(--accent)}
+    .sidebar-heatmap-legend{display:flex;gap:8px;font-size:9px;color:var(--muted);justify-content:center;margin-top:5px;align-items:center}
+    .sidebar-heatmap-legend span{display:flex;align-items:center;gap:3px}
+    .sidebar-heatmap-legend i{display:inline-block;width:8px;height:8px;border-radius:1px}
+    .sidebar-heatmap-days{display:flex;justify-content:space-between;font-size:8px;color:var(--muted);margin-bottom:3px;padding:0 2px}
+    .sidebar-heatmap-days span{width:11px;text-align:center}
+
     #main{flex:1;display:flex;flex-direction:column;min-width:0;height:100vh}
     #content{flex:1;overflow-y:auto;padding:22px 26px 40px;-webkit-overflow-scrolling:touch}
     .page{display:none;animation:fadeIn .25s ease}
@@ -269,6 +282,16 @@
       <div class="nav-item" data-page="fiveyear" onclick="go('fiveyear')"><span class="nav-icon">🎯</span>五年计划</div>
       <div class="nav-item" data-page="timeline" onclick="go('timeline')"><span class="nav-icon">🔍</span>时光机</div>
     </nav>
+    <div class="sidebar-heatmap" id="sidebarHeatmap">
+      <div class="sidebar-heatmap-title">习惯热力 · 近91天</div>
+      <div class="sidebar-heatmap-days"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+      <div class="sidebar-heatmap-grid" id="sidebarHeatmapGrid"></div>
+      <div class="sidebar-heatmap-legend">
+        <span><i style="background:var(--green)"></i>全</span>
+        <span><i style="background:var(--yellow);opacity:.7"></i>半</span>
+        <span><i style="border:1px solid var(--elev);background:transparent"></i>空</span>
+      </div>
+    </div>
     <div class="sidebar-bottom">
       <button class="theme-btn" onclick="openTheme()">🎨 切换皮肤</button>
       <button class="settings-btn" onclick="openSettings()">⚙️ 设置</button>
@@ -692,7 +715,11 @@
         <button class="btn btn-secondary" onclick="closeSettings()">取消</button>
         <button class="btn" onclick="saveSettings()">保存</button>
       </div>
-      <div class="modal-hint" style="margin-top:12px">⚠️ 自动备份能把数据存到 GitHub 私有仓库，即使清缓存也能恢复。强烈建议开启。</div>
+      <div class="modal-hint" style="margin-top:12px">📦 <b>三层备份策略</b>：① GitHub 自动备份（主）→ ② 保存到 Obsidian（坚果云同步为兜底）→ ③ 下方下载 JSON 手动备份。⚠️ 强烈建议至少配好 GitHub Token。</div>
+      <div style="margin-top:10px">
+        <button class="btn btn-secondary" style="width:100%" onclick="downloadBackup()">💾 下载数据备份 (.json)</button>
+        <div class="modal-hint" style="margin-top:6px">下载后放到坚果云同步的 Obsidian 库文件夹，多一层保障。</div>
+      </div>
     </div>
   </div>
 
@@ -786,7 +813,7 @@
       else if(page==='fiveyear')renderFiveYear();
       else if(page==='timeline'){loadTimelineDate();collectAllTags()}
     }
-    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open')}
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');renderSidebarHeatmap()}
     function updateGreeting(){
       const h=new Date().getHours();let g='';
       if(h<6)g='夜深了，澜舟。早点休息';else if(h<9)g='早上好，澜舟';else if(h<12)g='上午好，澜舟';else if(h<14)g='中午好，澜舟';else if(h<18)g='下午好，澜舟';else g='晚上好，澜舟';
@@ -868,7 +895,7 @@
       if(!currentHabit)return;const h=habits.find(x=>x.id===currentHabit);if(!h)return;
       const dt=getToday();if(!data.habits[dt])data.habits[dt]={};
       const record={};h.fields.forEach(f=>{const el=document.getElementById('field_'+f.key);if(el)record[f.key]=el.value;});
-      data.habits[dt][currentHabit]=record;saveData();renderHabits();updateStats();
+      data.habits[dt][currentHabit]=record;saveData();renderHabits();updateStats();renderSidebarHeatmap();
       const btn=document.getElementById('detailCheckin');btn.textContent='更新打卡';
       btn.style.background='linear-gradient(135deg,var(--accent),var(--accent2))';
       renderDetailChart(currentHabit);
@@ -1062,8 +1089,8 @@
     function jumpToDate(dt){timelineDate=dt;document.getElementById('timelineDate').value=dt;go('timeline');loadTimelineDate()}
 
     function buildMarkdown(dt){const d=dt||getToday();let md='# '+dateLabel(d)+' ('+d+')\n\n';const jd=gd(d,'journal');if(jd.text){md+='## 日记\n\n'+jd.text+'\n\n';if(jd.tags&&jd.tags.length)md+='标签: '+formatTags(jd.tags)+'\n\n'}const tds=gd(d,'todos');if(tds.today&&tds.today.length){md+='## 待办\n\n';tds.today.forEach(t=>md+='- ['+(t.done?'x':' ')+'] '+t.text+'\n');md+='\n'}const hd=gd(d,'habits');if(Object.keys(hd).length){md+='## 习惯打卡\n\n';habits.forEach(h=>{if(hd[h.id]){const r=hd[h.id];if(h.id==='reading')md+='- '+h.name+': '+r.minutes+'分钟 (《'+r.book+'》)\n';else if(h.id==='exercise')md+='- '+h.name+': '+r.minutes+'分钟 ('+r.type+')\n';else if(h.id==='tidy')md+='- '+h.name+': '+r.minutes+'分钟 ('+r.area+')\n';else if(h.id==='sleep')md+='- '+h.name+': '+r.bedtime+' → '+r.wakeup+' (质量: '+r.quality+')\n'}});md+='\n'}const exd=gd(d,'exercise');if(exd.items&&exd.items.length){md+='## 运动\n\n';exd.items.forEach(e=>md+='- '+e.type+' '+e.min+'分钟'+(e.note?' — '+e.note:'')+'\n');md+='\n'}const id=gd(d,'invest');if(id.tasks&&id.tasks.length){md+='## 投资\n\n';id.tasks.forEach(t=>md+='- ['+(t.done?'x':' ')+'] '+t.text+'\n'+(t.annos||[]).map(a=>'  - '+a.time+' '+a.text+'\n').join(''));md+='\n'}md+='\n---\n自动生成于 '+new Date().toISOString()+'\n';return md}
-    function saveToObsidian(){const vault=data.settings.vault||'梦里星光';const folder=data.settings.folder||'澜舟的工作台';const dt=getToday();const md=buildMarkdown(dt);const fname=dt.replace(/-/g,'')+'.md';const uri='obsidian://advanced-uri?vault='+encodeURIComponent(vault)+'&filepath='+encodeURIComponent(folder+'/'+fname)+'&data='+encodeURIComponent(md)+'&mode=overwrite';navigator.clipboard.writeText(md).catch(()=>{});if(/Android|iPhone|iPad/i.test(navigator.userAgent)){window.location.href=uri}else{alert('Markdown 已复制到剪贴板')}}
-    function saveOtherDate(){const dt=prompt('输入日期 (YYYY-MM-DD)',getToday());if(!dt)return;const vault=data.settings.vault||'梦里星光';const folder=data.settings.folder||'澜舟的工作台';const md=buildMarkdown(dt);const fname=dt.replace(/-/g,'')+'.md';const uri='obsidian://advanced-uri?vault='+encodeURIComponent(vault)+'&filepath='+encodeURIComponent(folder+'/'+fname)+'&data='+encodeURIComponent(md)+'&mode=overwrite';navigator.clipboard.writeText(md).catch(()=>{});if(/Android|iPhone|iPad/i.test(navigator.userAgent)){window.location.href=uri}else{alert('Markdown 已复制到剪贴板')}}
+    function saveToObsidian(){const vault=data.settings.vault||'梦里星光';const folder=data.settings.folder||'澜舟的工作台';const dt=getToday();const md=buildMarkdown(dt);const fname=dt.replace(/-/g,'')+'.md';const uri='obsidian://advanced-uri?vault='+encodeURIComponent(vault)+'&filepath='+encodeURIComponent(folder+'/'+fname)+'&data='+encodeURIComponent(md)+'&mode=overwrite';navigator.clipboard.writeText(md).catch(()=>{});dataModifiedSinceObsidianSave=false;data.settings.lastObsidianSave=new Date().toISOString();saveData();if(/Android|iPhone|iPad/i.test(navigator.userAgent)){window.location.href=uri}else{alert('Markdown 已复制到剪贴板')}}
+    function saveOtherDate(){const dt=prompt('输入日期 (YYYY-MM-DD)',getToday());if(!dt)return;const vault=data.settings.vault||'梦里星光';const folder=data.settings.folder||'澜舟的工作台';const md=buildMarkdown(dt);const fname=dt.replace(/-/g,'')+'.md';const uri='obsidian://advanced-uri?vault='+encodeURIComponent(vault)+'&filepath='+encodeURIComponent(folder+'/'+fname)+'&data='+encodeURIComponent(md)+'&mode=overwrite';navigator.clipboard.writeText(md).catch(()=>{});dataModifiedSinceObsidianSave=false;data.settings.lastObsidianSave=new Date().toISOString();saveData();if(/Android|iPhone|iPad/i.test(navigator.userAgent)){window.location.href=uri}else{alert('Markdown 已复制到剪贴板')}}
     function copyMarkdown(){const md=buildMarkdown(getToday());navigator.clipboard.writeText(md).then(()=>alert('Markdown 已复制到剪贴板')).catch(()=>alert('复制失败'))}
 
     async function callDeepSeek(prompt){const apiKey=data.settings.apiKey;if(!apiKey)return null;try{const r=await fetch('https://api.deepseek.com/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+apiKey},body:JSON.stringify({model:data.settings.apiModel||'deepseek-v4-flash',messages:[{role:'user',content:prompt}],max_tokens:500,temperature:.7})});if(!r.ok)return null;const j=await r.json();return j.choices&&j.choices[0]?j.choices[0].message.content:null}catch(e){return null}}
@@ -1078,11 +1105,52 @@
     function refreshAll(){renderHome();renderNovel();renderWechat();renderHealth();renderFiveYear();loadTimelineDate();collectAllTags()}
     function renderHome(){updateGreeting();renderToday();renderPool();renderHabits();updateStats();document.getElementById('obsFolderDisplay').textContent=data.settings.folder||'澜舟的工作台'}
 
+    let dataModifiedSinceObsidianSave = true; // 启动时默认认为未保存
+
+    function renderSidebarHeatmap(){
+      const grid=document.getElementById('sidebarHeatmapGrid');if(!grid)return;
+      const days=[];const today=new Date(getToday());
+      // 先找到本周日（周日=0），往前推到周一作为网格起点
+      const dow=today.getDay();const monday=new Date(today);monday.setDate(today.getDate()-(dow===0?6:dow-1));
+      for(let i=90;i>=0;i--){days.push(fmt(new Date(monday.getTime()-(i+1)*86400000)))}
+      grid.innerHTML=days.map(d=>{
+        const hd0=gd(d,'habits');const hc=habits.filter(h=>hd0[h.id]).length;
+        let cls='';if(hc===habits.length)cls='done';
+        else if(hc>0)cls='partial';
+        if(d===getToday())cls+=' today';
+        return '<div class="sidebar-heatmap-cell '+cls+'" title="'+d+' | '+hc+'/'+habits.length+' 项"></div>';
+      }).join('');
+    }
+
+    function downloadBackup(){
+      const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+      const url=URL.createObjectURL(blob);const a=document.createElement('a');
+      a.href=url;a.download='澜舟工作台_备份_'+getToday()+'.json';document.body.appendChild(a);
+      a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+      dataModifiedSinceObsidianSave=false;
+      data.settings.lastObsidianSave=new Date().toISOString();
+      saveData();
+    }
+
+    window.addEventListener('beforeunload',function(e){
+      if(dataModifiedSinceObsidianSave){
+        e.preventDefault();e.returnValue='';return '';
+      }
+    });
+
+    let _saveData_original = saveData;
+    saveData = function(){
+      dataModifiedSinceObsidianSave = true;
+      return _saveData_original();
+    };
+
     window.addEventListener('load',()=>{
       loadData();document.body.className=data.settings.theme||'theme-purple';
-      document.getElementById('backupStatus').textContent=(data.settings.githubAutoBackup&&data.settings.githubToken)?'自动备份已开启':'本地模式';
+      let s=(data.settings.githubAutoBackup&&data.settings.githubToken)?'☁️ GitHub备份已开':'💡 点击设置配备份';
+      if(data.settings.lastObsidianSave)s+=' · 存档 '+data.settings.lastObsidianSave.substring(5,10);
+      document.getElementById('backupStatus').textContent=s;
       updateGreeting();renderToday();renderPool();renderHabits();updateStats();
-      renderNovel();renderWechat();renderHealth();renderFiveYear();collectAllTags();
+      renderNovel();renderWechat();renderHealth();renderFiveYear();collectAllTags();renderSidebarHeatmap();
       document.getElementById('obsFolderDisplay').textContent=data.settings.folder||'澜舟的工作台';
     });
   </script>
