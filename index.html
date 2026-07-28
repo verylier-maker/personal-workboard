@@ -19,16 +19,40 @@
       --green:#00b894;--yellow:#fdcb6e;--red:#ff7675;--orange:#e17055;
       --quote-color:#a29bfe;
       --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
-      --radius:18px;--radius-sm:12px;--icon-filter:none;
+      --font-heading:var(--font);
+      --radius:18px;--radius-sm:12px;--radius-lg:24px;
+      --shadow:0 4px 24px rgba(0,0,0,.15);--shadow-sm:0 2px 8px rgba(0,0,0,.08);
+      --border:1px solid var(--elev);--border-accent:1px solid var(--accent);
+      --icon-filter:none;
+      --spacing:10px;
+    }
+    .theme-purple{
+      --bg:#0f0f12;--panel:#18181d;--card:#202028;--elev:#2a2a35;
+      --text:#f5f5f7;--sub:#a0a0b0;--muted:#6e6e80;
+      --accent:#6c5ce7;--accent2:#a29bfe;--accent3:#fd79a8;
+      --green:#00b894;--yellow:#fdcb6e;--red:#ff7675;--orange:#e17055;
+      --quote-color:#a29bfe;
+      --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+      --font-heading:var(--font);
+      --radius:18px;--radius-sm:12px;--radius-lg:24px;
+      --shadow:0 4px 24px rgba(0,0,0,.15);--shadow-sm:0 2px 8px rgba(0,0,0,.08);
+      --border:1px solid var(--elev);--border-accent:1px solid var(--accent);
+      --icon-filter:none;
+      --spacing:10px;
     }
     .theme-minimal{
       --bg:#f7f8fa;--panel:#ffffff;--card:#ffffff;--elev:#f1f3f5;
       --text:#343a40;--sub:#868e96;--muted:#adb5bd;
-      --accent:#495057;--accent2:#495057;--accent3:#e64980;
+      --accent:#495057;--accent2:#868e96;--accent3:#e64980;
       --green:#40c057;--yellow:#fab005;--red:#fa5252;--orange:#fd7e14;
-      --quote-color:#868e96;
+      --quote-color:#495057;
       --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+      --font-heading:-apple-system,BlinkMacSystemFont,sans-serif;
+      --radius:6px;--radius-sm:4px;--radius-lg:10px;
+      --shadow:none;--shadow-sm:none;
+      --border:1px solid #dee2e6;--border-accent:1px solid var(--accent);
       --icon-filter:drop-shadow(0 1px 1px rgba(0,0,0,.06));
+      --spacing:6px;
     }
     .theme-forest{
       --bg:#0d1f17;--panel:#142920;--card:#1b3526;--elev:#234130;
@@ -36,8 +60,13 @@
       --accent:#52b788;--accent2:#d8f3dc;--accent3:#95d5b2;
       --green:#2dc653;--yellow:#ffd43b;--red:#ff6b6b;--orange:#ff922b;
       --quote-color:#95d5b2;
-      --font:"PingFang SC","Microsoft YaHei","Noto Serif SC",serif;
+      --font:"LXGW WenKai","PingFang SC","Microsoft YaHei","Noto Serif SC",serif;
+      --font-heading:"LXGW WenKai","Noto Serif SC",serif;
+      --radius:24px;--radius-sm:16px;--radius-lg:32px;
+      --shadow:0 6px 20px rgba(0,0,0,.2);--shadow-sm:0 2px 6px rgba(0,0,0,.1);
+      --border:1px solid var(--elev);--border-accent:2px solid var(--accent);
       --icon-filter:sepia(.2) saturate(1.2);
+      --spacing:14px;
     }
     .theme-sakura{
       --bg:#1f1218;--panel:#2d1b22;--card:#3d232d;--elev:#4f2d39;
@@ -45,8 +74,13 @@
       --accent:#ff8fab;--accent2:#ffe4e6;--accent3:#ffb3c6;
       --green:#51cf66;--yellow:#fcc419;--red:#ff8787;--orange:#ff922b;
       --quote-color:#ffb3c6;
-      --font:"PingFang SC","Microsoft YaHei",cursive;
+      --font:"PingFang SC","Microsoft YaHei","Hiragino Maru Gothic",sans-serif;
+      --font-heading:"PingFang SC","Hiragino Mincho Pro",serif;
+      --radius:22px;--radius-sm:14px;--radius-lg:30px;
+      --shadow:0 4px 30px rgba(255,143,171,.08);--shadow-sm:0 2px 10px rgba(255,143,171,.05);
+      --border:1px solid var(--elev);--border-accent:1px solid var(--accent);
       --icon-filter:drop-shadow(0 0 4px rgba(255,179,198,.35));
+      --spacing:12px;
     }
     .theme-ocean{
       --bg:#0a1628;--panel:#101f38;--card:#162744;--elev:#1d3358;
@@ -55,7 +89,12 @@
       --green:#2ec4b6;--yellow:#f4d35e;--red:#e63946;--orange:#f77f00;
       --quote-color:#90e0ef;
       --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+      --font-heading:"Segoe UI","PingFang SC",sans-serif;
+      --radius:8px;--radius-sm:6px;--radius-lg:14px;
+      --shadow:0 2px 16px rgba(0,0,0,.2);--shadow-sm:0 1px 4px rgba(0,0,0,.15);
+      --border:1px solid rgba(76,201,240,.12);--border-accent:1px solid var(--accent);
       --icon-filter:contrast(1.05);
+      --spacing:8px;
     }
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{height:100%;margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.55;overflow:hidden}
@@ -95,17 +134,17 @@
     .page.active{display:block}
     @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-    h1{font-size:24px;margin:0 0 4px}
+    h1{font-size:24px;margin:0 0 4px;font-family:var(--font-heading);letter-spacing:-.3px}
     .sub{color:var(--sub);font-size:13px;margin-bottom:20px}
-    .quote{font-style:italic;color:var(--quote-color);font-size:15px;margin-bottom:20px;padding-left:12px;border-left:3px solid var(--quote-color);line-height:1.7;opacity:.9}
+    .quote{font-style:italic;color:var(--quote-color);font-size:15px;margin-bottom:20px;padding-left:12px;border-left:3px solid var(--quote-color);line-height:1.7;opacity:.9;font-family:var(--font-heading)}
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
-    .card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid var(--elev)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--spacing);margin-bottom:18px}
+    .card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);border:var(--border)}
     .card-label{font-size:11px;color:var(--sub);margin-bottom:5px}
     .card-value{font-size:26px;font-weight:700;color:var(--text)}
     .card-value.accent{color:var(--accent)}
 
-    .todo-card{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--elev);margin-bottom:14px}
+    .todo-card{background:var(--card);border-radius:var(--radius);padding:16px;border:var(--border);margin-bottom:14px;box-shadow:var(--shadow-sm)}
     .todo-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
     .todo-title{font-size:15px;font-weight:600}
     .todo-meta{font-size:12px;color:var(--sub)}
@@ -144,8 +183,8 @@
     .detail-header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
     .back-btn{width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--elev);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);font-size:18px}
     .detail-title{font-size:20px;font-weight:700}
-    .detail-card{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid var(--elev);margin-bottom:14px}
-    .detail-card h4{margin:0 0 12px;font-size:15px;color:var(--accent)}
+    .detail-card{background:var(--card);border-radius:var(--radius);padding:18px;border:var(--border);margin-bottom:14px;box-shadow:var(--shadow-sm)}
+    .detail-card h4{margin:0 0 12px;font-size:15px;color:var(--accent);font-family:var(--font-heading)}
     .field{margin-bottom:12px}
     .field label{display:block;font-size:12px;color:var(--sub);margin-bottom:5px}
     .field input,.field textarea,.field select{width:100%;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:11px 13px;color:var(--text);font-size:14px;outline:none;font-family:inherit}
@@ -154,7 +193,7 @@
     .checkin-big:active{filter:brightness(1.08)}
     .checkin-big:disabled{background:var(--muted);cursor:not-allowed}
 
-    .text-card{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--elev);margin-bottom:14px}
+    .text-card{background:var(--card);border-radius:var(--radius);padding:16px;border:var(--border);margin-bottom:14px;box-shadow:var(--shadow-sm)}
     .text-card h4{margin:0 0 10px;font-size:15px}
     .big-textarea{width:100%;min-height:140px;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:13px;color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit}
     .word-count{text-align:right;font-size:12px;color:var(--sub);margin-top:6px}
@@ -195,7 +234,7 @@
     .filter-chip{padding:5px 11px;border-radius:20px;background:var(--elev);color:var(--sub);font-size:12px;cursor:pointer;border:1px solid transparent}
     .filter-chip.active{background:var(--accent);color:#fff}
 
-    .chart-wrap{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--elev);margin-bottom:14px}
+    .chart-wrap{background:var(--card);border-radius:var(--radius);padding:14px;border:var(--border);margin-bottom:14px;box-shadow:var(--shadow-sm)}
     .chart-title{font-size:14px;font-weight:600;margin-bottom:10px;color:var(--sub)}
     .chart-svg{width:100%;height:160px}
     .chart-empty{text-align:center;color:var(--muted);font-size:13px;padding:30px 0}
@@ -229,7 +268,7 @@
 
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
     .modal.show{display:flex}
-    .modal-box{background:var(--panel);border-radius:var(--radius);padding:20px;width:100%;max-width:360px;border:1px solid var(--elev);max-height:85vh;overflow-y:auto}
+    .modal-box{background:var(--panel);border-radius:var(--radius-lg);padding:20px;width:100%;max-width:360px;border:var(--border);max-height:85vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.3)}
     .modal-title{font-size:16px;font-weight:700;margin-bottom:14px}
     .modal-row{margin-bottom:11px}
     .modal-row label{display:block;font-size:12px;color:var(--sub);margin-bottom:5px}
@@ -248,8 +287,13 @@
     .ai-result{background:var(--elev);border-radius:var(--radius-sm);padding:12px;font-size:14px;line-height:1.7;margin-top:10px;border-left:3px solid var(--accent)}
     .ai-loading{color:var(--sub);font-size:13px;padding:8px 0}
 
-    .backup-card{background:var(--card);border-radius:var(--radius);padding:14px;border:1px solid var(--elev);margin-bottom:14px}
+    .backup-card{background:var(--card);border-radius:var(--radius);padding:14px;border:var(--border);margin-bottom:14px;box-shadow:var(--shadow-sm)}
     .backup-card h4{margin:0 0 8px;font-size:15px}
+
+    .save-reminder{position:fixed;top:0;left:0;right:0;z-index:200;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:600;display:none;align-items:center;justify-content:center;gap:10px;box-shadow:0 2px 16px rgba(0,0,0,.2)}
+    .save-reminder.show{display:flex}
+    .save-reminder .remind-btn{background:rgba(255,255,255,.25);border:none;color:#fff;padding:5px 12px;border-radius:14px;font-size:12px;cursor:pointer;white-space:nowrap}
+    .save-reminder .remind-dismiss{background:none;border:none;color:rgba(255,255,255,.6);font-size:16px;cursor:pointer;padding:0 4px}
 
     @media (max-width:768px){
       #sidebar{position:fixed;left:0;top:0;bottom:0;z-index:50;transform:translateX(-100%);width:220px}
@@ -268,6 +312,11 @@
   </style>
 </head>
 <body class="theme-purple">
+  <div class="save-reminder" id="saveReminder">
+    ⚠️ 数据已修改，记得保存到 Obsidian ！
+    <button class="remind-btn" onclick="saveToObsidian()">立即保存</button>
+    <button class="remind-dismiss" onclick="dismissReminder()">×</button>
+  </div>
   <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()">☰</button>
   <aside id="sidebar">
     <div class="brand"><span>🎯</span> 澜舟工作台</div>
@@ -573,7 +622,7 @@
       <!-- 五年计划 -->
       <section class="page" id="page-fiveyear">
         <h1>五年计划推进</h1>
-        <p class="panel-intro">这里放你未来五年的大方向。下面是你最近三个月的习惯热力图。</p>
+        <p class="panel-intro">这里放你未来五年的大方向。下面是你未来五年的大方向。侧边栏有习惯热力图。</p>
 
         <div class="grid">
           <div class="card"><div class="card-label">总目标数</div><div class="card-value" id="fyTotal">0</div></div>
@@ -600,18 +649,6 @@
           <textarea class="big-textarea" id="fyActions" placeholder="这个季度要推进哪些事？" oninput="saveFiveYear()"></textarea>
         </div>
 
-        <div class="heatmap">
-          <div class="heatmap-head">
-            <span>习惯打卡热力图（近3个月）</span>
-            <div class="heatmap-legend">
-              <span><span style="background:var(--green)"></span>全完成</span>
-              <span><span style="background:var(--yellow)"></span>部分</span>
-              <span><span style="border:1px solid var(--elev);background:transparent"></span>未做</span>
-            </div>
-          </div>
-          <div class="heatmap-month-labels" id="heatmapMonthLabels"></div>
-          <div class="heatmap-grid" id="heatmapGrid"></div>
-        </div>
       </section>
 
       <!-- 时光机 -->
@@ -658,11 +695,11 @@
   <div class="modal" id="themeModal" onclick="if(event.target===this)closeTheme()">
     <div class="modal-box">
       <div class="modal-title">切换皮肤</div>
-      <div class="theme-option" onclick="setTheme('theme-purple')"><div class="theme-dot" style="background:linear-gradient(135deg,#6c5ce7,#00d2d3)"></div><div class="theme-name">暗夜紫 · 默认</div></div>
-      <div class="theme-option" onclick="setTheme('theme-minimal')"><div class="theme-dot" style="background:linear-gradient(135deg,#f8f9fa,#adb5bd)"></div><div class="theme-name">极简白 · 明亮</div></div>
-      <div class="theme-option" onclick="setTheme('theme-forest')"><div class="theme-dot" style="background:linear-gradient(135deg,#52b788,#95d5b2)"></div><div class="theme-name">森系绿 · 安静</div></div>
-      <div class="theme-option" onclick="setTheme('theme-sakura')"><div class="theme-dot" style="background:linear-gradient(135deg,#ff8fab,#fb6f92)"></div><div class="theme-name">暖樱粉 · 温柔</div></div>
-      <div class="theme-option" onclick="setTheme('theme-ocean')"><div class="theme-dot" style="background:linear-gradient(135deg,#4cc9f0,#4361ee)"></div><div class="theme-name">深海蓝 · 沉稳</div></div>
+      <div class="theme-option" onclick="setTheme('theme-purple')"><div class="theme-dot" style="background:linear-gradient(135deg,#6c5ce7,#00d2d3)"></div><div class="theme-name">暗夜紫 · 圆润现代</div></div>
+      <div class="theme-option" onclick="setTheme('theme-minimal')"><div class="theme-dot" style="background:linear-gradient(135deg,#f8f9fa,#adb5bd)"></div><div class="theme-name">极简白 · 直角扁平</div></div>
+      <div class="theme-option" onclick="setTheme('theme-forest')"><div class="theme-dot" style="background:linear-gradient(135deg,#52b788,#95d5b2)"></div><div class="theme-name">森系绿 · 大圆角衬线</div></div>
+      <div class="theme-option" onclick="setTheme('theme-sakura')"><div class="theme-dot" style="background:linear-gradient(135deg,#ff8fab,#fb6f92)"></div><div class="theme-name">暖樱粉 · 柔光软角</div></div>
+      <div class="theme-option" onclick="setTheme('theme-ocean')"><div class="theme-dot" style="background:linear-gradient(135deg,#4cc9f0,#4361ee)"></div><div class="theme-name">深海蓝 · 小圆角方正</div></div>
       <button class="modal-close" onclick="closeTheme()">关闭</button>
     </div>
   </div>
@@ -1032,20 +1069,11 @@
       document.getElementById('fyQuarter').textContent=ms.filter(m=>m.created&&new Date(m.created)>=qs).length;
       const mStart=new Date(now.getFullYear(),now.getMonth(),1);document.getElementById('fyMonth').textContent=ms.filter(m=>m.created&&new Date(m.created)>=mStart).length;
       document.getElementById('fyList').innerHTML=ms.length?ms.map((m,i)=>'<div class="todo-item'+(m.done?' done':'')+'"><div class="todo-check" onclick="toggleFiveYear('+i+')">'+(m.done?'✓':'')+'</div><div class="todo-text">'+m.text+'</div><span class="todo-meta" style="font-size:11px">'+m.created+'</span><span class="todo-del" onclick="deleteFiveYear('+i+')">×</span></div>').join(''):'<div class="empty">还没有里程碑</div>';
-      renderHeatmap();
     }
     function saveFiveYear(){data.fiveyear.vision=document.getElementById('fyVision').value;data.fiveyear.actions=document.getElementById('fyActions').value;saveData()}
     function addFiveYear(){const input=document.getElementById('fyInput');const txt=input.value.trim();if(!txt)return;if(!data.fiveyear.milestones)data.fiveyear.milestones=[];data.fiveyear.milestones.push({text:txt,done:false,created:getToday()});input.value='';saveData();renderFiveYear()}
     function toggleFiveYear(i){if(data.fiveyear.milestones[i]){data.fiveyear.milestones[i].done=!data.fiveyear.milestones[i].done;saveData();renderFiveYear()}}
     function deleteFiveYear(i){data.fiveyear.milestones.splice(i,1);saveData();renderFiveYear()}
-    function renderHeatmap(){
-      const days=[];const today=new Date(getToday());for(let i=89;i>=0;i--){days.push(fmt(new Date(today.getTime()-i*86400000)))}
-      const ml=document.getElementById('heatmapMonthLabels');const mg=document.getElementById('heatmapGrid');
-      const months=[];let lm='';days.forEach((d,i)=>{const m=d.substring(5,7);if(m!==lm){months.push({idx:i,label:m+'月'});lm=m}});
-      ml.innerHTML=days.map((d,i)=>{const m0=months.find(x=>x.idx===i);return'<span>'+(m0?m0.label:'')+'</span>'}).join('');
-      mg.innerHTML=days.map(d=>{const hd0=gd(d,'habits');const hc=habits.filter(h=>hd0[h.id]).length;let cls='missed';if(hc===habits.length)cls='done';else if(hc>0)cls='partial';if(d===getToday())cls+=' today';return'<div class="heatmap-cell '+cls+'" title="'+d+' | '+hc+'/'+habits.length+' 项"></div>'}).join('');
-    }
-
     function loadTimelineDate(){
       const el=document.getElementById('timelineDate');if(!el.value)el.value=timelineDate;timelineDate=el.value||getToday();
       document.getElementById('timelineReview').textContent=buildReview(timelineDate)||'这一天还没有数据';
@@ -1089,8 +1117,8 @@
     function jumpToDate(dt){timelineDate=dt;document.getElementById('timelineDate').value=dt;go('timeline');loadTimelineDate()}
 
     function buildMarkdown(dt){const d=dt||getToday();let md='# '+dateLabel(d)+' ('+d+')\n\n';const jd=gd(d,'journal');if(jd.text){md+='## 日记\n\n'+jd.text+'\n\n';if(jd.tags&&jd.tags.length)md+='标签: '+formatTags(jd.tags)+'\n\n'}const tds=gd(d,'todos');if(tds.today&&tds.today.length){md+='## 待办\n\n';tds.today.forEach(t=>md+='- ['+(t.done?'x':' ')+'] '+t.text+'\n');md+='\n'}const hd=gd(d,'habits');if(Object.keys(hd).length){md+='## 习惯打卡\n\n';habits.forEach(h=>{if(hd[h.id]){const r=hd[h.id];if(h.id==='reading')md+='- '+h.name+': '+r.minutes+'分钟 (《'+r.book+'》)\n';else if(h.id==='exercise')md+='- '+h.name+': '+r.minutes+'分钟 ('+r.type+')\n';else if(h.id==='tidy')md+='- '+h.name+': '+r.minutes+'分钟 ('+r.area+')\n';else if(h.id==='sleep')md+='- '+h.name+': '+r.bedtime+' → '+r.wakeup+' (质量: '+r.quality+')\n'}});md+='\n'}const exd=gd(d,'exercise');if(exd.items&&exd.items.length){md+='## 运动\n\n';exd.items.forEach(e=>md+='- '+e.type+' '+e.min+'分钟'+(e.note?' — '+e.note:'')+'\n');md+='\n'}const id=gd(d,'invest');if(id.tasks&&id.tasks.length){md+='## 投资\n\n';id.tasks.forEach(t=>md+='- ['+(t.done?'x':' ')+'] '+t.text+'\n'+(t.annos||[]).map(a=>'  - '+a.time+' '+a.text+'\n').join(''));md+='\n'}md+='\n---\n自动生成于 '+new Date().toISOString()+'\n';return md}
-    function saveToObsidian(){const vault=data.settings.vault||'梦里星光';const folder=data.settings.folder||'澜舟的工作台';const dt=getToday();const md=buildMarkdown(dt);const fname=dt.replace(/-/g,'')+'.md';const uri='obsidian://advanced-uri?vault='+encodeURIComponent(vault)+'&filepath='+encodeURIComponent(folder+'/'+fname)+'&data='+encodeURIComponent(md)+'&mode=overwrite';navigator.clipboard.writeText(md).catch(()=>{});dataModifiedSinceObsidianSave=false;data.settings.lastObsidianSave=new Date().toISOString();saveData();if(/Android|iPhone|iPad/i.test(navigator.userAgent)){window.location.href=uri}else{alert('Markdown 已复制到剪贴板')}}
-    function saveOtherDate(){const dt=prompt('输入日期 (YYYY-MM-DD)',getToday());if(!dt)return;const vault=data.settings.vault||'梦里星光';const folder=data.settings.folder||'澜舟的工作台';const md=buildMarkdown(dt);const fname=dt.replace(/-/g,'')+'.md';const uri='obsidian://advanced-uri?vault='+encodeURIComponent(vault)+'&filepath='+encodeURIComponent(folder+'/'+fname)+'&data='+encodeURIComponent(md)+'&mode=overwrite';navigator.clipboard.writeText(md).catch(()=>{});dataModifiedSinceObsidianSave=false;data.settings.lastObsidianSave=new Date().toISOString();saveData();if(/Android|iPhone|iPad/i.test(navigator.userAgent)){window.location.href=uri}else{alert('Markdown 已复制到剪贴板')}}
+    function saveToObsidian(){const vault=data.settings.vault||'梦里星光';const folder=data.settings.folder||'澜舟的工作台';const dt=getToday();const md=buildMarkdown(dt);const fname=dt.replace(/-/g,'')+'.md';const uri='obsidian://advanced-uri?vault='+encodeURIComponent(vault)+'&filepath='+encodeURIComponent(folder+'/'+fname)+'&data='+encodeURIComponent(md)+'&mode=overwrite';navigator.clipboard.writeText(md).catch(()=>{});dataModifiedSinceObsidianSave=false;hideReminder();data.settings.lastObsidianSave=new Date().toISOString();saveData();if(/Android|iPhone|iPad/i.test(navigator.userAgent)){window.location.href=uri}else{alert('Markdown 已复制到剪贴板')}}
+    function saveOtherDate(){const dt=prompt('输入日期 (YYYY-MM-DD)',getToday());if(!dt)return;const vault=data.settings.vault||'梦里星光';const folder=data.settings.folder||'澜舟的工作台';const md=buildMarkdown(dt);const fname=dt.replace(/-/g,'')+'.md';const uri='obsidian://advanced-uri?vault='+encodeURIComponent(vault)+'&filepath='+encodeURIComponent(folder+'/'+fname)+'&data='+encodeURIComponent(md)+'&mode=overwrite';navigator.clipboard.writeText(md).catch(()=>{});dataModifiedSinceObsidianSave=false;hideReminder();data.settings.lastObsidianSave=new Date().toISOString();saveData();if(/Android|iPhone|iPad/i.test(navigator.userAgent)){window.location.href=uri}else{alert('Markdown 已复制到剪贴板')}}
     function copyMarkdown(){const md=buildMarkdown(getToday());navigator.clipboard.writeText(md).then(()=>alert('Markdown 已复制到剪贴板')).catch(()=>alert('复制失败'))}
 
     async function callDeepSeek(prompt){const apiKey=data.settings.apiKey;if(!apiKey)return null;try{const r=await fetch('https://api.deepseek.com/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+apiKey},body:JSON.stringify({model:data.settings.apiModel||'deepseek-v4-flash',messages:[{role:'user',content:prompt}],max_tokens:500,temperature:.7})});if(!r.ok)return null;const j=await r.json();return j.choices&&j.choices[0]?j.choices[0].message.content:null}catch(e){return null}}
@@ -1127,20 +1155,27 @@
       const url=URL.createObjectURL(blob);const a=document.createElement('a');
       a.href=url;a.download='澜舟工作台_备份_'+getToday()+'.json';document.body.appendChild(a);
       a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-      dataModifiedSinceObsidianSave=false;
+      dataModifiedSinceObsidianSave=false;hideReminder();
       data.settings.lastObsidianSave=new Date().toISOString();
       saveData();
     }
 
     window.addEventListener('beforeunload',function(e){
       if(dataModifiedSinceObsidianSave){
-        e.preventDefault();e.returnValue='';return '';
+        e.preventDefault();e.returnValue='有未保存的数据！用首页"同步到 Obsidian"按钮保存。';
       }
     });
+
+    function showReminder(){
+      if(dataModifiedSinceObsidianSave) document.getElementById('saveReminder').classList.add('show');
+    }
+    function hideReminder(){document.getElementById('saveReminder').classList.remove('show')}
+    function dismissReminder(){hideReminder();setTimeout(showReminder,300000)} // 5 分钟后再提醒
 
     let _saveData_original = saveData;
     saveData = function(){
       dataModifiedSinceObsidianSave = true;
+      showReminder();
       return _saveData_original();
     };
 
