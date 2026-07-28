@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="澜舟的工作台">
   <title>澜舟的工作台</title>
-  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoi5rKZ6Iez5bel5L2c5ZGYIiwic2hvcnRfbmFtZSI6IuWtl+iHsSIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGYwZjEyIiwidGhlbWVfY29sb3IiOiIjMGYwZjEyIn0=">
+  <link rel="manifest" href="manifest.json">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%236c5ce7'/%3E%3Ctext x='50' y='66' font-size='50' text-anchor='middle' fill='white'%3E%F0%9F%8E%AF%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%236c5ce7'/%3E%3Ctext x='90' y='125' font-size='90' text-anchor='middle' fill='white'%3E%F0%9F%8E%AF%3C/text%3E%3C/svg%3E">
   <style>
@@ -1211,6 +1211,14 @@
       updateGreeting();renderToday();renderPool();renderHabits();updateStats();
       renderNovel();renderWechat();renderHealth();renderFiveYear();collectAllTags();renderSidebarHeatmap();
       document.getElementById('obsFolderDisplay').textContent=data.settings.folder||'澜舟的工作台';
+      // 注册 Service Worker（离线缓存 + PWA 安装）
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.register('sw.js').then(function(reg){
+          console.log('SW registered:', reg.scope);
+        }).catch(function(err){
+          console.log('SW failed:', err);
+        });
+      }
     });
   </script>
 </body>
