@@ -15,16 +15,53 @@
     :root{
       --bg:#0f0f12;--panel:#18181d;--card:#202028;--elev:#2a2a35;
       --text:#f5f5f7;--sub:#a0a0b0;--muted:#6e6e80;
-      --accent:#6c5ce7;--accent2:#00d2d3;--accent3:#fd79a8;
+      --accent:#6c5ce7;--accent2:#a29bfe;--accent3:#fd79a8;
       --green:#00b894;--yellow:#fdcb6e;--red:#ff7675;--orange:#e17055;
-      --ring-empty:#2a2a35;
+      --quote-color:#a29bfe;
       --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
       --radius:18px;--radius-sm:12px;
+      --icon-filter:none;
     }
-    .theme-minimal{--bg:#f8f9fa;--panel:#ffffff;--card:#ffffff;--elev:#f1f3f5;--text:#212529;--sub:#6c757d;--muted:#adb5bd;--accent:#495057;--accent2:#0ca678;--accent3:#e64980;--ring-empty:#e9ecef;}
-    .theme-forest{--bg:#0d1f17;--panel:#142920;--card:#1b3526;--elev:#234130;--text:#f1f8f4;--sub:#9db8a8;--muted:#6b8a78;--accent:#52b788;--accent2:#95d5b2;--accent3:#d8f3dc;--ring-empty:#1b3526;}
-    .theme-sakura{--bg:#1f1218;--panel:#2d1b22;--card:#3d232d;--elev:#4f2d39;--text:#fff5f8;--sub:#e8c4d0;--muted:#b88a99;--accent:#ff8fab;--accent2:#fb6f92;--accent3:#ffb3c6;--ring-empty:#4f2d39;}
-    .theme-ocean{--bg:#0a1628;--panel:#101f38;--card:#162744;--elev:#1d3358;--text:#f0f7ff;--sub:#9fb8d4;--muted:#6b8cae;--accent:#4cc9f0;--accent2:#4895ef;--accent3:#4361ee;--ring-empty:#1d3358;}
+    /* 极简白：明亮、干净、优雅 */
+    .theme-minimal{
+      --bg:#f7f8fa;--panel:#ffffff;--card:#ffffff;--elev:#f1f3f5;
+      --text:#343a40;--sub:#868e96;--muted:#adb5bd;
+      --accent:#495057;--accent2:#495057;--accent3:#e64980;
+      --green:#40c057;--yellow:#fab005;--red:#fa5252;--orange:#fd7e14;
+      --quote-color:#868e96;
+      --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+      --icon-filter:drop-shadow(0 1px 1px rgba(0,0,0,.06));
+    }
+    /* 森系绿：安静、自然 */
+    .theme-forest{
+      --bg:#0d1f17;--panel:#142920;--card:#1b3526;--elev:#234130;
+      --text:#f1f8f4;--sub:#9db8a8;--muted:#6b8a78;
+      --accent:#52b788;--accent2:#d8f3dc;--accent3:#95d5b2;
+      --green:#2dc653;--yellow:#ffd43b;--red:#ff6b6b;--orange:#ff922b;
+      --quote-color:#95d5b2;
+      --font:"PingFang SC","Microsoft YaHei","Noto Serif SC",serif;
+      --icon-filter:sepia(.2) saturate(1.2);
+    }
+    /* 暖樱粉：温柔、治愈 */
+    .theme-sakura{
+      --bg:#1f1218;--panel:#2d1b22;--card:#3d232d;--elev:#4f2d39;
+      --text:#fff5f8;--sub:#e8c4d0;--muted:#b88a99;
+      --accent:#ff8fab;--accent2:#ffe4e6;--accent3:#ffb3c6;
+      --green:#51cf66;--yellow:#fcc419;--red:#ff8787;--orange:#ff922b;
+      --quote-color:#ffb3c6;
+      --font:"PingFang SC","Microsoft YaHei",cursive;
+      --icon-filter:drop-shadow(0 0 4px rgba(255,179,198,.35));
+    }
+    /* 深海蓝：沉稳、克制 */
+    .theme-ocean{
+      --bg:#0a1628;--panel:#101f38;--card:#162744;--elev:#1d3358;
+      --text:#f0f7ff;--sub:#9fb8d4;--muted:#6b8cae;
+      --accent:#4cc9f0;--accent2:#90e0ef;--accent3:#4361ee;
+      --green:#2ec4b6;--yellow:#f4d35e;--red:#e63946;--orange:#f77f00;
+      --quote-color:#90e0ef;
+      --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+      --icon-filter:contrast(1.05);
+    }
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
     html,body{height:100%;margin:0;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.55;overflow:hidden}
     body{display:flex}
@@ -35,7 +72,7 @@
     /* 侧边栏 */
     #sidebar{width:180px;background:var(--panel);border-right:1px solid var(--elev);display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;transition:.25s}
     .brand{text-align:center;padding:0 16px 24px;font-size:18px;font-weight:700;color:var(--text);letter-spacing:1px}
-    .brand span{font-size:22px}
+    .brand span{font-size:22px;filter:var(--icon-filter)}
     .nav-item{display:flex;align-items:center;gap:10px;padding:12px 20px;margin:2px 12px;border-radius:var(--radius-sm);color:var(--sub);cursor:pointer;transition:.2s;font-size:14px;position:relative}
     .nav-item:hover{background:var(--elev);color:var(--text)}
     .nav-item.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 20px rgba(0,0,0,.2)}
@@ -53,24 +90,26 @@
 
     h1{font-size:26px;margin:0 0 4px}
     .sub{color:var(--sub);font-size:14px;margin-bottom:22px}
-    .quote{font-style:italic;color:var(--accent2);font-size:15px;margin-bottom:22px;padding-left:12px;border-left:3px solid var(--accent2);line-height:1.7}
+    .quote{font-style:italic;color:var(--quote-color);font-size:15px;margin-bottom:22px;padding-left:12px;border-left:3px solid var(--quote-color);line-height:1.7;opacity:.9}
 
     /* 卡片 */
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
     .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid var(--elev)}
     .card-label{font-size:12px;color:var(--sub);margin-bottom:6px}
     .card-value{font-size:28px;font-weight:700;color:var(--text)}
-    .card-value.accent{color:var(--accent2)}
+    .card-value.accent{color:var(--accent)}
 
-    /* 进度环 */
-    .progress-wrap{background:var(--card);border-radius:var(--radius);padding:20px;display:flex;align-items:center;gap:22px;margin-bottom:20px;border:1px solid var(--elev)}
-    .ring{position:relative;width:110px;height:110px;flex-shrink:0}
-    .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-    .ring-bg{fill:none;stroke:var(--ring-empty);stroke-width:10}
-    .ring-fill{fill:none;stroke:url(#ringGrad);stroke-width:10;stroke-linecap:round;stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset .6s ease}
-    .ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700}
-    .progress-info h3{margin:0 0 4px;font-size:17px}
-    .progress-info p{margin:0;color:var(--sub);font-size:13px}
+    /* 迷你日历 */
+    .mini-cal{background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--elev);margin-bottom:20px}
+    .mini-cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:14px;font-weight:600}
+    .mini-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}
+    .mini-cal-day-name{font-size:10px;color:var(--sub);padding:3px 0}
+    .mini-cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:11px}
+    .mini-cal-cell.done{background:var(--green);color:#fff}
+    .mini-cal-cell.partial{background:var(--yellow);color:#000}
+    .mini-cal-cell.missed{background:var(--red);color:#fff}
+    .mini-cal-cell.today{box-shadow:inset 0 0 0 2px var(--accent)}
+    .mini-cal-cell.future{color:var(--muted)}
 
     /* 习惯网格 */
     .section-title{font-size:15px;font-weight:600;margin:22px 0 12px;display:flex;align-items:center;justify-content:space-between}
@@ -79,7 +118,7 @@
     .habit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
     .habit.done{border-color:var(--green);background:linear-gradient(135deg,rgba(0,184,148,.12),var(--card))}
     .habit-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-    .habit-icon{font-size:26px}
+    .habit-icon{font-size:26px;filter:var(--icon-filter)}
     .habit-title{font-size:15px;font-weight:600}
     .habit-desc{font-size:12px;color:var(--sub)}
     .habit-check{position:absolute;right:14px;top:14px;width:24px;height:24px;border-radius:50%;border:2px solid var(--elev);display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:.2s}
@@ -112,7 +151,7 @@
     .back-btn{width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--elev);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);font-size:18px}
     .detail-title{font-size:20px;font-weight:700}
     .detail-card{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid var(--elev);margin-bottom:16px}
-    .detail-card h4{margin:0 0 14px;font-size:15px;color:var(--accent2)}
+    .detail-card h4{margin:0 0 14px;font-size:15px;color:var(--accent)}
     .field{margin-bottom:14px}
     .field label{display:block;font-size:13px;color:var(--sub);margin-bottom:6px}
     .field input,.field textarea,.field select{width:100%;background:var(--elev);border:none;border-radius:var(--radius-sm);padding:12px 14px;color:var(--text);font-size:14px;outline:none;font-family:inherit}
@@ -211,25 +250,19 @@
           <div class="card"><div class="card-label">连续天数</div><div class="card-value" id="statStreak">0</div></div>
         </div>
 
-        <div class="progress-wrap">
-          <div class="ring">
-            <svg><defs><linearGradient id="ringGrad"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--accent2)"/></linearGradient></defs><circle class="ring-bg" cx="55" cy="55" r="45"/><circle class="ring-fill" id="ringFill" cx="55" cy="55" r="45"/></svg>
-            <div class="ring-text" id="ringText">0%</div>
-          </div>
-          <div class="progress-info">
-            <h3>今日完成度</h3>
-            <p id="progressTip">开始今天的第一件事吧</p>
-          </div>
+        <div class="mini-cal">
+          <div class="mini-cal-head"><span>本月打卡</span><span style="font-size:12px;color:var(--sub);cursor:pointer" onclick="go('diary')">查看完整日历 →</span></div>
+          <div class="mini-cal-grid" id="miniCalGrid"></div>
         </div>
-
-        <div class="section-title">习惯打卡</div>
-        <div class="habits" id="habitList"></div>
 
         <div class="todo-card">
           <div class="todo-head"><span class="todo-title">今日待办</span><span class="todo-meta">今天必须做完</span></div>
           <div class="todo-input-wrap"><input class="todo-input" id="todayInput" placeholder="加一条今天必须做的事，回车添加" onkeydown="if(event.key==='Enter')addTodo('today')"><button class="btn" onclick="addTodo('today')">添加</button></div>
           <div class="todo-list" id="todayList"><div class="empty">今天还没有待办，加一条吧</div></div>
         </div>
+
+        <div class="section-title">习惯打卡</div>
+        <div class="habits" id="habitList"></div>
 
         <div class="todo-card">
           <div class="todo-head"><span class="todo-title">计划池</span><span class="todo-meta">要做，但可以推后</span></div>
@@ -239,7 +272,7 @@
 
         <div class="sync-card">
           <div class="sync-title">📝 同步到 Obsidian</div>
-          <div class="sync-desc">保存今天的工作台记录到 Obsidian 笔记。手机和电脑自动同步。</div>
+          <div class="sync-desc">保存今天所有面板记录到 Obsidian。只会保存一份当天总笔记，自动落进「澜舟的工作台」文件夹。</div>
           <div class="sync-btns">
             <button class="btn" onclick="saveToObsidian()">保存到 Obsidian</button>
             <button class="btn btn-secondary" onclick="copyMarkdown()">复制 Markdown</button>
@@ -282,55 +315,43 @@
           <textarea class="big-textarea" id="journal" placeholder="今天发生了什么？有什么想法？随便写..." oninput="saveJournal()"></textarea>
           <div class="word-count" id="journalCount">0 字</div>
         </div>
-
-        <div class="sync-card">
-          <div class="sync-title">📝 同步到 Obsidian</div>
-          <div class="sync-desc">保存今天的日记与复盘到 Obsidian。</div>
-          <div class="sync-btns">
-            <button class="btn" onclick="saveToObsidian()">保存到 Obsidian</button>
-            <button class="btn btn-secondary" onclick="copyMarkdown()">复制 Markdown</button>
-          </div>
-        </div>
       </section>
 
       <!-- 投资 -->
       <section class="page" id="page-invest">
         <h1>投资</h1>
-        <p class="panel-intro">记录持仓、行情看法和交易想法。不是交易系统，是你的投资备忘录。</p>
+        <p class="panel-intro">长期交易备忘录。不追每日行情，只记关键操作和想法。</p>
 
-        <div class="card" style="margin-bottom:16px">
-          <div class="card-label">今日市场一句话</div>
-          <input id="marketNote" placeholder="今天对市场最深的印象..." style="width:100%;background:transparent;border:none;color:var(--text);font-size:16px;outline:none;margin-top:8px;font-family:inherit" onchange="saveInvest()">
+        <div class="todo-card">
+          <div class="todo-head"><span class="todo-title">交易记录与想法</span><span class="todo-meta">已执行 / 待执行</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div class="field" style="margin:0"><label>类型</label><select id="invType"><option>已执行操作</option><option>待执行想法</option></select></div>
+            <div class="field" style="margin:0"><label>标的（可选）</label><input id="invTarget" placeholder="如：沪深300ETF"></div>
+          </div>
+          <div class="field"><label>内容</label><input id="invContent" placeholder="如：再平衡卖出5%仓位 / 等回调加仓红利" onkeydown="if(event.key==='Enter')addInvest()"></div>
+          <button class="btn" style="width:100%" onclick="addInvest()">记录</button>
         </div>
 
         <div class="todo-card">
-          <div class="todo-head"><span class="todo-title">持仓速记</span><span class="todo-meta">代码 / 方向 / 理由</span></div>
-          <div class="todo-input-wrap">
-            <input class="todo-input" id="positionInput" placeholder="例如：沪深300ETF - 持有 - 估值低" onkeydown="if(event.key==='Enter')addInvestItem('positions')">
-            <button class="btn" onclick="addInvestItem('positions')">添加</button>
-          </div>
-          <div class="note-list" id="positionList"><div class="empty">还没有持仓记录</div></div>
+          <div class="todo-head"><span class="todo-title">记录列表</span></div>
+          <div class="note-list" id="investList"><div class="empty">还没有投资记录</div></div>
         </div>
 
-        <div class="todo-card">
-          <div class="todo-head"><span class="todo-title">交易想法</span><span class="todo-meta">想买 / 想卖 / 观望</span></div>
+        <div class="todo-card" style="display:none" id="positionCard">
+          <div class="todo-head"><span class="todo-title">持仓清单（可选）</span></div>
           <div class="todo-input-wrap">
-            <input class="todo-input" id="tradeInput" placeholder="例如：考虑加仓红利ETF，等回调" onkeydown="if(event.key==='Enter')addInvestItem('trades')">
-            <button class="btn" onclick="addInvestItem('trades')">添加</button>
+            <input class="todo-input" id="positionInput" placeholder="标的 - 仓位 - 备注" onkeydown="if(event.key==='Enter')addPosition()">
+            <button class="btn" onclick="addPosition()">添加</button>
           </div>
-          <div class="note-list" id="tradeList"><div class="empty">还没有交易想法</div></div>
+          <div class="note-list" id="positionList"><div class="empty">暂无持仓</div></div>
         </div>
-
-        <div class="text-card">
-          <h4>📰 要闻与复盘</h4>
-          <textarea class="big-textarea" id="investReview" placeholder="今天有哪些政策/公司/行业消息值得记？对自己的持仓有什么影响？" oninput="saveInvest()"></textarea>
-        </div>
+        <div style="text-align:center;margin:8px 0"><button class="btn-text" onclick="togglePosition()">显示/隐藏 持仓清单</button></div>
       </section>
 
       <!-- 运动 -->
       <section class="page" id="page-exercise">
         <h1>运动</h1>
-        <p class="panel-intro">记录每次运动。目标不是量化一切，是让自己看见「我一直在动」。</p>
+        <p class="panel-intro">记录每次动起来的时刻。散步、瑜伽、八段锦都算。</p>
 
         <div class="grid">
           <div class="card"><div class="card-label">本周运动</div><div class="card-value" id="exWeekCount">0 次</div></div>
@@ -341,10 +362,10 @@
         <div class="todo-card">
           <div class="todo-head"><span class="todo-title">今日运动记录</span></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-            <div class="field" style="margin:0"><label>运动类型</label><select id="exType"><option>散步</option><option>跑步</option><option>骑行</option><option>力量训练</option><option>瑜伽/拉伸</option><option>球类</option><option>其他</option></select></div>
+            <div class="field" style="margin:0"><label>运动类型</label><select id="exType"><option>散步</option><option>瑜伽 / 拉伸</option><option>球类</option><option>亲子运动</option><option>八段锦</option><option>其他</option></select></div>
             <div class="field" style="margin:0"><label>时长（分钟）</label><input type="number" id="exMin" placeholder="30" min="1"></div>
           </div>
-          <div class="field"><label>备注（可选）</label><input id="exNote" placeholder="跑了多远、感受如何、有没有酸痛..."></div>
+          <div class="field"><label>备注（可选）</label><input id="exNote" placeholder="感受、强度、和谁一起..."></div>
           <button class="btn" style="width:100%" onclick="addExercise()">记录运动</button>
         </div>
 
@@ -438,23 +459,23 @@
       "不要被想象出来的困难吓倒。","你已经比想象中更勇敢了。","给自己一点时间，也给努力一点时间。","不求天天高能，但求日日有进。","每一次选择开始，都值得被庆祝。"
     ];
     const habits=[
-      {id:'read',icon:'📖',title:'阅读',desc:'每天读一点',color:'#6c5ce7',fields:[
+      {id:'read',icon:'📖',title:'阅读',desc:'每天读一点',fields:[
         {key:'book',label:'书名',type:'text',placeholder:'在读什么书？'},
         {key:'time',label:'阅读时长（分钟）',type:'number',placeholder:'30'},
         {key:'pages',label:'页数',type:'number',placeholder:'看了多少页'},
         {key:'note',label:'心得体会',type:'textarea',placeholder:'有什么想法或收获？'}
       ]},
-      {id:'exercise',icon:'🏃',title:'运动',desc:'让身体动起来',color:'#00b894',fields:[
-        {key:'type',label:'运动类型',type:'select',options:['散步','跑步','骑行','力量训练','瑜伽/拉伸','球类','其他']},
+      {id:'exercise',icon:'🏃',title:'运动',desc:'让身体动起来',fields:[
+        {key:'type',label:'运动类型',type:'select',options:['散步','瑜伽 / 拉伸','球类','亲子运动','八段锦','其他']},
         {key:'duration',label:'时长（分钟）',type:'number',placeholder:'30'},
-        {key:'note',label:'备注',type:'textarea',placeholder:'感受、距离、强度...'}
+        {key:'note',label:'备注',type:'textarea',placeholder:'感受、强度...'}
       ]},
-      {id:'tidy',icon:'✨',title:'整理',desc:'每天收拾一点',color:'#fdcb6e',fields:[
+      {id:'tidy',icon:'✨',title:'整理',desc:'每天收拾一点',fields:[
         {key:'area',label:'整理了哪里',type:'text',placeholder:'例如：书桌、衣柜、厨房'},
         {key:'time',label:'花了多久（分钟）',type:'number',placeholder:'15'},
         {key:'note',label:'感受',type:'textarea',placeholder:'整理完心情如何？'}
       ]},
-      {id:'sleep',icon:'😴',title:'早睡',desc:'好好睡一觉',color:'#ff7675',fields:[
+      {id:'sleep',icon:'😴',title:'早睡',desc:'好好睡一觉',fields:[
         {key:'time',label:'入睡时间',type:'text',placeholder:'例如：23:00'},
         {key:'ontime',label:'是否在目标时间前睡？',type:'select',options:['是，按时睡了','否，熬夜了']},
         {key:'note',label:'备注',type:'textarea',placeholder:'睡前做了什么？'}
@@ -464,12 +485,15 @@
     const LS=k=>localStorage.getItem(k)||'';
     const SS=(k,v)=>localStorage.setItem(k,v);
     const todayStr=()=>new Date().toISOString().slice(0,10);
+    const vaultName='梦里星光';
+    const obsidianFolder='澜舟的工作台';
+
     function loadData(){
       let data=JSON.parse(LS('workboard_data')||'{}');
       if(!data.todos)data.todos={today:[],pool:[]};
       if(!data.habits)data.habits={};
       if(!data.journal)data.journal={};
-      if(!data.invest)data.invest={marketNote:'',positions:[],trades:[],review:''};
+      if(!data.invest)data.invest={records:[],positions:[]};
       if(!data.exercise)data.exercise=[];
       if(!data.writing)data.writing=[];
       if(!data.fiveyear)data.fiveyear={vision:'',milestones:[],actions:''};
@@ -494,8 +518,7 @@
     }
     function dailyQuote(){
       const d=todayStr().replace(/-/g,'');
-      const idx=parseInt(d,10)%quotes.length;
-      return quotes[idx];
+      return quotes[parseInt(d,10)%quotes.length];
     }
 
     function go(page){
@@ -513,9 +536,10 @@
       document.getElementById('greeting').textContent=greeting();
       document.getElementById('dailyQuote').textContent='「'+dailyQuote()+'」';
 
+      const todayH=data.habits[todayStr()]||{};
+
       // 习惯渲染
       const hl=document.getElementById('habitList');
-      const todayH=data.habits[todayStr()]||{};
       hl.innerHTML=habits.map(h=>{
         const done=!!todayH[h.id];
         return '<div class="habit '+(done?'done':'')+'" onclick="openDetail(\''+h.id+'\')">'+
@@ -536,15 +560,8 @@
       document.getElementById('statHabit').textContent=doneHabits+'/'+habits.length;
       document.getElementById('statStreak').textContent=calcStreak();
 
-      // 进度环
-      const totalScore=(totalTodos||0)+habits.length;
-      const doneScore=doneTodos+doneHabits;
-      const pct=totalScore?Math.round(doneScore/totalScore*100):0;
-      const C=2*Math.PI*45;
-      document.getElementById('ringFill').style.strokeDasharray=C;
-      document.getElementById('ringFill').style.strokeDashoffset=C*(1-pct/100);
-      document.getElementById('ringText').textContent=pct+'%';
-      document.getElementById('progressTip').textContent=totalScore===0?'开始今天的第一件事吧':`已完成 ${doneScore} / ${totalScore} 项`;
+      // 迷你日历
+      renderMiniCal();
 
       // 日记
       document.getElementById('autoReview').innerHTML=generateReview().replace(/\n/g,'<br>');
@@ -553,9 +570,7 @@
       renderCalendar();
 
       // 投资
-      document.getElementById('marketNote').value=data.invest.marketNote;
-      document.getElementById('investReview').value=data.invest.review;
-      renderInvestList();
+      renderInvest();
 
       // 运动
       renderExercise();
@@ -598,8 +613,7 @@
       while(true){
         const k=d.toISOString().slice(0,10);
         const h=data.habits[k]||{};
-        const allDone=habits.every(x=>h[x.id]);
-        if(!allDone)break;
+        if(!habits.every(x=>h[x.id]))break;
         s++;d.setDate(d.getDate()-1);
       }
       return s;
@@ -635,18 +649,40 @@
         record[f.key]=el?el.value:'';
       });
       data.habits[k][currentDetailHabit.id]=record;
+      // 运动习惯同步到运动面板
+      if(currentDetailHabit.id==='exercise'){
+        const type=record.type||'运动';
+        const min=parseInt(record.duration)||0;
+        if(min>0)data.exercise.push({date:k,type:type,duration:min,note:record.note||'',ts:Date.now()});
+      }
       save();
       const btn=document.getElementById('detailCheckin');
       btn.textContent='今日已打卡 ✓';btn.disabled=true;
-      // 如果运动习惯打卡，也同步到运动面板
-      if(currentDetailHabit.id==='exercise'){
-        const r=record;
-        const type=r.type||'运动';
-        const min=parseInt(r.duration)||0;
-        if(min>0)data.exercise.push({date:k,type:type,duration:min,note:r.note||'',ts:Date.now()});
-      }
-      save();
       setTimeout(()=>go('home'),400);
+    }
+
+    // 迷你日历
+    function renderMiniCal(){
+      const now=new Date(),y=now.getFullYear(),m=now.getMonth();
+      const first=new Date(y,m,1),last=new Date(y,m+1,0);
+      const startDay=first.getDay();
+      const days=last.getDate();
+      const tstr=todayStr();
+      let html='';
+      for(let i=0;i<startDay;i++)html+='<div class="mini-cal-cell"></div>';
+      for(let d=1;d<=days;d++){
+        const ds=y+'-'+(m+1).toString().padStart(2,'0')+'-'+d.toString().padStart(2,'0');
+        const h=data.habits[ds]||{};
+        const doneN=habits.filter(x=>h[x.id]).length;
+        let cls='mini-cal-cell';
+        if(ds===tstr)cls+=' today';
+        if(ds>tstr)cls+=' future';
+        else if(doneN===habits.length&&doneN>0)cls+=' done';
+        else if(doneN>0)cls+=' partial';
+        else cls+=' missed';
+        html+='<div class="'+cls+'">'+d+'</div>';
+      }
+      document.getElementById('miniCalGrid').innerHTML=html;
     }
 
     // 日历
@@ -717,41 +753,85 @@
 
     // Obsidian
     function buildMarkdown(){
-      let md=generateReview()+'\n\n---\n\n# 今日速记\n\n'+(data.journal[todayStr()]||'（空）')+'\n\n';
-      md+='\n---\n\n# 投资备忘\n\n**市场印象：** '+(data.invest.marketNote||'无')+'\n\n';
-      if(data.invest.positions.length)md+='**持仓：**\n'+data.invest.positions.map(p=>'- '+p).join('\n')+'\n\n';
-      if(data.invest.trades.length)md+='**交易想法：**\n'+data.invest.trades.map(p=>'- '+p).join('\n')+'\n\n';
-      md+='**要闻复盘：**\n'+(data.invest.review||'无')+'\n\n';
-      md+='\n---\n\n# 运动记录\n\n';
-      const todayEx=data.exercise.filter(e=>e.date===todayStr());
-      if(todayEx.length)md+=todayEx.map(e=>'- '+e.type+' '+e.duration+'分钟'+(e.note?'（'+e.note+'）':'')).join('\n');
-      else md+='- 今天还没有运动记录';
+      const k=todayStr();
+      let md='# 工作台日志：'+k+'\n\n';
+      md+=generateReview()+'\n\n---\n\n';
+      md+='## 今日速记\n\n'+(data.journal[k]||'（空）')+'\n\n';
+
+      // 投资
+      md+='---\n\n## 投资记录\n\n';
+      const todayInv=data.invest.records.filter(r=>r.date===k);
+      if(todayInv.length){
+        todayInv.forEach(r=>{
+          md+='- **'+r.type+'**'+(r.target?'「'+r.target+'」':'')+'：'+r.content+'\n';
+        });
+      }else md+='- 今天没有投资记录\n';
+      if(data.invest.positions.length){
+        md+='\n**持仓备忘：**\n'+data.invest.positions.map(p=>'- '+p).join('\n')+'\n';
+      }
+      md+='\n';
+
+      // 运动
+      md+='---\n\n## 运动记录\n\n';
+      const todayEx=data.exercise.filter(e=>e.date===k);
+      if(todayEx.length)todayEx.forEach(e=>md+='- '+e.type+' '+e.duration+'分钟'+(e.note?'（'+e.note+'）':'')+'\n');
+      else md+='- 今天还没有运动记录\n';
+      md+='\n';
+
+      // 写作
+      md+='---\n\n## 写作灵感\n\n';
+      const todayWr=data.writing.filter(w=>w.date===k);
+      if(todayWr.length)todayWr.forEach(w=>md+='- **'+w.tag+'**：'+w.text+'\n');
+      else md+='- 今天没有收录灵感\n';
+      md+='\n';
+
+      // 五年计划
+      md+='---\n\n## 五年计划\n\n**愿景：** '+(data.fiveyear.vision||'未填写')+'\n\n';
+      if(data.fiveyear.milestones.length)md+='**年度里程碑：**\n'+data.fiveyear.milestones.map(m=>'- '+(m.done?'[x] ':'[ ] ')+m.text).join('\n')+'\n\n';
+      md+='**本季度重点行动：**\n'+(data.fiveyear.actions||'未填写')+'\n';
+
       return md;
     }
     function saveToObsidian(){
       const md=buildMarkdown();
-      const title='工作台记录/'+todayStr();
-      const url='obsidian://new?vault='+encodeURIComponent('梦里星光')+'&file='+encodeURIComponent(title)+'&content='+encodeURIComponent(md);
+      const k=todayStr();
+      const filePath=obsidianFolder+'/'+k;
+      // Advanced URI: overwrite mode
+      const url='obsidian://advanced-uri?vault='+encodeURIComponent(vaultName)+'&filepath='+encodeURIComponent(filePath)+'&data='+encodeURIComponent(md)+'&mode=overwrite';
       window.location.href=url;
     }
     function copyMarkdown(){
-      navigator.clipboard.writeText(buildMarkdown()).then(()=>alert('Markdown 已复制，去 Obsidian 粘贴即可'));
+      navigator.clipboard.writeText(buildMarkdown()).then(()=>alert('Markdown 已复制'));
     }
 
     // 投资
-    function saveInvest(){data.invest.marketNote=document.getElementById('marketNote').value;data.invest.review=document.getElementById('investReview').value;save();}
-    function addInvestItem(type){
-      const id=type==='positions'?'positionInput':'tradeInput';
-      const v=document.getElementById(id).value.trim();if(!v)return;
-      data.invest[type].push(v);document.getElementById(id).value='';save();
+    function addInvest(){
+      const type=document.getElementById('invType').value;
+      const target=document.getElementById('invTarget').value.trim();
+      const content=document.getElementById('invContent').value.trim();
+      if(!content)return;
+      data.invest.records.push({date:todayStr(),type,target,content,ts:Date.now()});
+      document.getElementById('invTarget').value='';document.getElementById('invContent').value='';save();
     }
-    function renderInvestList(){
+    function addPosition(){
+      const v=document.getElementById('positionInput').value.trim();if(!v)return;
+      data.invest.positions.push(v);document.getElementById('positionInput').value='';save();
+    }
+    function togglePosition(){
+      const c=document.getElementById('positionCard');
+      c.style.display=c.style.display==='none'?'block':'none';
+    }
+    function renderInvest(){
+      const il=document.getElementById('investList');
+      const list=data.invest.records.slice().reverse();
+      il.innerHTML=list.length?list.map((r,i)=>'<div class="note-item"><span style="display:inline-block;padding:2px 8px;border-radius:10px;background:'+(r.type==='已执行操作'?'var(--green)':'var(--yellow)')+';color:'+(r.type==='已执行操作'?'#fff':'#000')+';font-size:11px;margin-right:8px">'+r.type+'</span>'+(r.target?'<b>'+escapeHtml(r.target)+'</b> · ':'')+escapeHtml(r.content)+'<div class="note-time">'+r.date+' <span style="cursor:pointer;color:var(--red)" onclick="delInvest('+i+')">删除</span></div></div>').join(''):'<div class="empty">还没有投资记录</div>';
       const pl=document.getElementById('positionList');
-      pl.innerHTML=data.invest.positions.length?data.invest.positions.map((p,i)=>'<div class="note-item">'+escapeHtml(p)+'<div class="note-time" style="cursor:pointer;color:var(--red)" onclick="delInvest(\'positions\','+i+')">删除</div></div>').join(''):'<div class="empty">还没有持仓记录</div>';
-      const tl=document.getElementById('tradeList');
-      tl.innerHTML=data.invest.trades.length?data.invest.trades.map((p,i)=>'<div class="note-item">'+escapeHtml(p)+'<div class="note-time" style="cursor:pointer;color:var(--red)" onclick="delInvest(\'trades\','+i+')">删除</div></div>').join(''):'<div class="empty">还没有交易想法</div>';
+      pl.innerHTML=data.invest.positions.length?data.invest.positions.map((p,i)=>'<div class="note-item">'+escapeHtml(p)+'<div class="note-time" style="cursor:pointer;color:var(--red)" onclick="delPosition('+i+')">删除</div></div>').join(''):'<div class="empty">暂无持仓</div>';
     }
-    function delInvest(type,i){data.invest[type].splice(i,1);save();}
+    function delInvest(i){
+      const list=data.invest.records.slice().reverse();const item=list[i];const idx=data.invest.records.indexOf(item);if(idx>-1)data.invest.records.splice(idx,1);save();
+    }
+    function delPosition(i){data.invest.positions.splice(i,1);save();}
 
     // 运动
     function addExercise(){
@@ -767,13 +847,12 @@
       const todayEx=data.exercise.filter(e=>e.date===k);
       const el=document.getElementById('exList');
       el.innerHTML=todayEx.length?todayEx.map((e,i)=>'<div class="note-item"><b>'+e.type+'</b> · '+e.duration+'分钟'+(e.note?' · '+escapeHtml(e.note):'')+'<div class="note-time" style="cursor:pointer;color:var(--red)" onclick="delExercise('+i+')">删除</div></div>').join(''):'<div class="empty">今天还没有运动记录</div>';
-      // 本周统计
       const now=new Date();const day=now.getDay()||7;const mon=new Date(now);mon.setDate(now.getDate()-day+1);mon.setHours(0,0,0,0);
       const week=data.exercise.filter(e=>new Date(e.date)>=mon);
       const weekMin=week.reduce((a,b)=>a+b.duration,0);
       document.getElementById('exWeekCount').textContent=week.length+' 次';
       document.getElementById('exWeekMin').textContent=weekMin+' 分';
-      document.getElementById('exStreak').textContent='待设计'; // 简化处理
+      document.getElementById('exStreak').textContent='待设计';
     }
     function delExercise(i){
       const k=todayStr();let c=0;for(let j=0;j<data.exercise.length;j++){if(data.exercise[j].date===k){if(c===i){data.exercise.splice(j,1);break;}c++;}}save();
@@ -809,7 +888,7 @@
       fl.innerHTML=data.fiveyear.milestones.length?data.fiveyear.milestones.map((m,i)=>'<div class="todo-item '+(m.done?'done':'')+'"><div class="todo-check" onclick="toggleFy('+i+')">'+(m.done?'✓':'')+'</div><div class="todo-text">'+escapeHtml(m.text)+'</div><div class="todo-del" onclick="delFy('+i+')">×</div></div>').join(''):'<div class="empty">还没有里程碑</div>';
       document.getElementById('fyTotal').textContent=data.fiveyear.milestones.length;
       document.getElementById('fyQuarter').textContent=data.fiveyear.milestones.filter(m=>m.done).length;
-      document.getElementById('fyMonth').textContent=0; // 等你定义规则
+      document.getElementById('fyMonth').textContent=0;
     }
     function toggleFy(i){data.fiveyear.milestones[i].done=!data.fiveyear.milestones[i].done;save();}
     function delFy(i){data.fiveyear.milestones.splice(i,1);save();}
