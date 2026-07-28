@@ -757,6 +757,7 @@
       <div style="margin-top:10px">
         <button class="btn btn-secondary" style="width:100%" onclick="downloadBackup()">💾 下载数据备份 (.json)</button>
         <div class="modal-hint" style="margin-top:6px">下载后放到坚果云同步的 Obsidian 库文件夹，多一层保障。</div>
+        <button class="btn btn-secondary" style="width:100%;margin-top:10px;background:var(--elev);color:var(--accent);border:1px dashed var(--accent)" onclick="showRawStorage()">🔍 查看当前浏览器存储的原始数据</button>
       </div>
     </div>
   </div>
@@ -1162,6 +1163,25 @@
       dataModifiedSinceObsidianSave=false;hideReminder();
       data.settings.lastObsidianSave=new Date().toISOString();
       saveData();
+    }
+
+    function showRawStorage(){
+      const raw=localStorage.getItem('workboard_data');
+      if(!raw){alert('当前浏览器没有存储数据。你可能在另一个设备/浏览器上保存的 Key，换到这个浏览器试试。');return;}
+      // 构建可复制的弹窗
+      const textarea=document.createElement('textarea');
+      textarea.value='===== 你的 localStorage 原始数据 =====\n\n'+raw+'\n\n===== 提取的 Key =====\n'+
+        'DeepSeek API Key: '+(data.settings.apiKey||'(空)')+'\n'+
+        'GitHub Token: '+(data.settings.githubToken||'(空)')+'\n'+
+        'Obsidian Vault: '+(data.settings.vault||'')+'\n'+
+        'Obsidian 文件夹: '+(data.settings.folder||'')+'\n';
+      textarea.style.cssText='position:fixed;top:10%;left:10%;width:80%;height:70%;z-index:10000;background:var(--bg);color:var(--text);border:2px solid var(--accent);border-radius:12px;padding:16px;font-size:12px;font-family:monospace;white-space:pre-wrap;overflow:auto;resize:both';
+      document.body.appendChild(textarea);
+      textarea.focus();textarea.select();
+      const close=document.createElement('button');
+      close.textContent='✕ 关闭';close.style.cssText='position:fixed;top:11%;right:11%;z-index:10001;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;font-size:13px';
+      close.onclick=function(){document.body.removeChild(textarea);document.body.removeChild(close);};
+      document.body.appendChild(close);
     }
 
     window.addEventListener('beforeunload',function(e){
