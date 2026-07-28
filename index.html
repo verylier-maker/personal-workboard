@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="工作台">
+<title>个人工作台</title>
+<style>
+  :root{
+    --bg:#0b0b0f; --card:#15151c; --line:rgba(255,255,255,.07);
+    --txt:#eef0f4; --sub:#8b8f9a; --accent:#7c5cff; --accent2:#22d3ee;
+    --ok:#34d399; --danger:#fb7185;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    max-width:480px;margin:0 auto;padding:0 16px 80px;
+    padding-top:env(safe-area-inset-top);
+    -webkit-font-smoothing:antialiased;
+  }
+  header{padding:22px 2px 14px}
+  .greet{font-size:22px;font-weight:700;letter-spacing:.5px}
+  .sub{color:var(--sub);font-size:13px;margin-top:4px}
+  .stats{display:flex;gap:10px;margin:16px 0 4px}
+  .stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 12px}
+  .stat .n{font-size:22px;font-weight:700}
+  .stat .l{font-size:11px;color:var(--sub);margin-top:4px}
+  .accent{color:var(--accent2)}
+  .ring-wrap{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
+  .ring{width:74px;height:74px;flex:0 0 auto;position:relative}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+  .ring-info .t{font-weight:600;font-size:14px}
+  .ring-info .d{font-size:12px;color:var(--sub);margin-top:4px}
+  section{margin-top:22px}
+  .sec-title{font-size:14px;font-weight:600;color:var(--sub);margin:0 2px 10px;display:flex;justify-content:space-between;align-items:center}
+  .sec-title .add-btn{color:var(--accent);font-size:13px;cursor:pointer;background:none;border:none;padding:4px}
+  .input-row{display:flex;gap:8px;margin-bottom:10px}
+  .input-row input{flex:1;background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:12px;padding:11px 14px;font-size:14px;outline:none}
+  .input-row input:focus{border-color:var(--accent)}
+  .input-row button{background:var(--accent);color:#fff;border:none;border-radius:12px;padding:0 16px;font-size:14px;font-weight:600;cursor:pointer}
+  .todo{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:8px}
+  .todo .box{width:22px;height:22px;border:2px solid var(--sub);border-radius:7px;flex:0 0 auto;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .todo.done .box{background:var(--ok);border-color:var(--ok);color:#04221a}
+  .todo .tx{flex:1;font-size:14px;line-height:1.3}
+  .todo.done .tx{color:var(--sub);text-decoration:line-through}
+  .todo .del{color:var(--sub);background:none;border:none;font-size:16px;cursor:pointer;padding:4px}
+  .empty{color:var(--sub);font-size:13px;text-align:center;padding:18px 0}
+  .habits{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .habit{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:transform .08s}
+  .habit:active{transform:scale(.97)}
+  .habit.done{border-color:var(--ok)}
+  .habit .ico{font-size:22px}
+  .habit .meta .name{font-size:14px;font-weight:600}
+  .habit .meta .streak{font-size:11px;color:var(--sub);margin-top:2px}
+  .habit.done .meta .streak{color:var(--ok)}
+  .tip{margin-top:26px;font-size:12px;color:var(--sub);text-align:center;line-height:1.6}
+  .tip b{color:var(--accent2)}
+  .export-section{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+  .export-section .et{font-size:14px;font-weight:600;margin-bottom:6px}
+  .export-section .ed{font-size:12px;color:var(--sub);margin-bottom:14px;line-height:1.5}
+  .export-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .btn-obs{flex:1;min-width:120px;background:linear-gradient(135deg,#7c3aed,#6366f1);color:#fff;border:none;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:600;cursor:pointer;text-align:center}
+  .btn-obs:active{opacity:.85;transform:scale(.97)}
+  .btn-copy{flex:1;min-width:120px;background:var(--bg);color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:13px;cursor:pointer;text-align:center}
+  .btn-copy:active{background:rgba(255,255,255,.05)}
+  .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--ok);color:#04221a;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:99;opacity:0;transition:opacity .25s;pointer-events:none}
+  .toast.show{opacity:1}
+  .vault-cfg{display:flex;align-items:center;gap:6px;margin-bottom:12px;font-size:12px;color:var(--sub)}
+  .vault-cfg input{width:100px;background:var(--bg);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:4px 8px;font-size:12px;outline:none}
+  .vault-cfg input:focus{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <div class="greet" id="greet">你好，澜舟</div>
+  <div class="sub" id="dateSub"></div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="n" id="todoN">0/0</div><div class="l">今日待办</div></div>
+  <div class="stat"><div class="n accent" id="habitN">0/0</div><div class="l">今日打卡</div></div>
+  <div class="stat"><div class="n" id="streakN">0</div><div class="l">连续天数</div></div>
+</div>
+
+<div class="ring-wrap">
+  <div class="ring">
+    <svg width="74" height="74">
+      <circle cx="37" cy="37" r="32" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="7"/>
+      <circle id="ringFg" cx="37" cy="37" r="32" fill="none" stroke="url(#g)" stroke-width="7" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"/>
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+    </svg>
+    <div class="pct" id="pct">0%</div>
+  </div>
+  <div class="ring-info">
+    <div class="t">今日完成度</div>
+    <div class="d" id="ringDesc">开始今天的第一件事吧</div>
+  </div>
+</div>
+
+<section>
+  <div class="sec-title">
+    <span>每日待办</span>
+    <button class="add-btn" id="clearDone">清除已完成</button>
+  </div>
+  <div class="input-row">
+    <input id="todoInput" placeholder="加一条待办，回车添加" maxlength="60">
+    <button id="addTodo">添加</button>
+  </div>
+  <div id="todoList"></div>
+</section>
+
+<section>
+  <div class="sec-title"><span>习惯打卡</span></div>
+  <div class="habits" id="habitGrid"></div>
+</section>
+
+<div class="export-section">
+  <div class="et">同步到 Obsidian</div>
+  <div class="ed">点击下方按钮，手机浏览器会唤起 Obsidian 创建笔记。<br>存到你的 Obsidian 库后，手机和电脑自动同步。</div>
+  <div class="vault-cfg">
+    库名 <input id="vaultName" value="梦里星光" placeholder="梦里星光"> &nbsp; 路径 <input id="savePath" value="工作台记录" placeholder="工作台记录" style="width:130px">
+  </div>
+  <div class="export-btns">
+    <button class="btn-obs" id="saveObs">📱 保存到 Obsidian</button>
+    <button class="btn-copy" id="copyMd">📋 复制 Markdown</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="tip">
+  数据同时存在本机浏览器和 Obsidian 里。<br>
+  <b>加到主屏幕</b>：浏览器菜单 → 添加到主屏幕，像 App 一样用。
+</div>
+
+<script>
+(function(){
+  var todayStr = new Date().toISOString().slice(0,10);
+  function Lget(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+  function Lset(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+  var todos = Lget('wb_todos',[]);
+  var habits = Lget('wb_habits',[
+    {id:'water',name:'喝水',ico:'💧'},
+    {id:'read',name:'阅读',ico:'📖'},
+    {id:'move',name:'运动',ico:'🏃'},
+    {id:'sleep',name:'早睡',ico:'😴'}
+  ]);
+  var log = Lget('wb_habitlog',{}); // {date:{hid:true}}
+
+  // greeting
+  var h = new Date().getHours();
+  var greet = h<6?'夜深了，澜舟':h<11?'早上好，澜舟':h<14?'中午好，澜舟':h<18?'下午好，澜舟':h<23?'晚上好，澜舟':'夜深了，澜舟';
+  document.getElementById('greet').textContent = greet;
+  var wk = ['日','一','二','三','四','五','六'][new Date().getDay()];
+  document.getElementById('dateSub').textContent = todayStr.replace(/-/g,'/')+' 周'+wk;
+
+  function habitDoneToday(id){return log[todayStr] && log[todayStr][id]}
+  function habitStreak(id){
+    var s=0,d=new Date();
+    // if today not done, streak counts up to yesterday? common: break if today missed -> show 0 to motivate
+    if(!habitDoneToday(id)) return 0;
+    while(true){
+      var ds=d.toISOString().slice(0,10);
+      if(log[ds]&&log[ds][id]){s++;d.setDate(d.getDate()-1);}else break;
+    }
+    return s;
+  }
+
+  function render(){
+    var todayTodos = todos.filter(function(t){return t.date===todayStr});
+    var doneN = todayTodos.filter(function(t){return t.done}).length;
+    var total = todayTodos.length;
+    var hDone = habits.filter(function(x){return habitDoneToday(x.id)}).length;
+    var hTotal = habits.length;
+    document.getElementById('todoN').textContent = doneN+'/'+total;
+    document.getElementById('habitN').textContent = hDone+'/'+hTotal;
+    var maxStreak = habits.reduce(function(m,x){return Math.max(m,habitStreak(x.id))},0);
+    document.getElementById('streakN').textContent = maxStreak;
+
+    var allTotal = total + hTotal;
+    var allDone = doneN + hDone;
+    var pct = allTotal? Math.round(allDone/allTotal*100):0;
+    document.getElementById('pct').textContent = pct+'%';
+    var C = 2*Math.PI*32;
+    document.getElementById('ringFg').setAttribute('stroke-dashoffset', C - C*pct/100);
+    document.getElementById('ringDesc').textContent = pct===0?'开始今天的第一件事吧':pct>=100?'今天全部完成，漂亮！':'已完成 '+allDone+'/'+allTotal+'，继续';
+
+    var tl = document.getElementById('todoList');
+    if(!total){tl.innerHTML='<div class="empty">今天还没有待办，加一条吧</div>';}
+    else{
+      tl.innerHTML = todayTodos.map(function(t){
+        return '<div class="todo'+(t.done?' done':'')+'" data-id="'+t.id+'">'+
+          '<div class="box">'+(t.done?'✓':'')+'</div>'+
+          '<div class="tx">'+t.text.replace(/</g,'&lt;')+'</div>'+
+          '<button class="del">✕</button></div>';
+      }).join('');
+    }
+
+    var hg = document.getElementById('habitGrid');
+    hg.innerHTML = habits.map(function(x){
+      var d = habitDoneToday(x.id);
+      var s = habitStreak(x.id);
+      return '<div class="habit'+(d?' done':'')+'" data-id="'+x.id+'">'+
+        '<div class="ico">'+x.ico+'</div>'+
+        '<div class="meta"><div class="name">'+x.name+'</div><div class="streak">'+(s>0?'🔥 连续 '+s+' 天':'点击打卡')+'</div></div></div>';
+    }).join('');
+  }
+
+  // events
+  document.getElementById('addTodo').onclick = addTodo;
+  document.getElementById('todoInput').addEventListener('keydown',function(e){if(e.key==='Enter')addTodo();});
+  function addTodo(){
+    var inp = document.getElementById('todoInput');
+    var v = inp.value.trim();
+    if(!v) return;
+    todos.push({id:Date.now()+''+Math.random().toString(36).slice(2,5),text:v,done:false,date:todayStr});
+    Lset('wb_todos',todos);
+    inp.value=''; render();
+  }
+  document.getElementById('todoList').addEventListener('click',function(e){
+    var row = e.target.closest('.todo'); if(!row) return;
+    var id = row.dataset.id;
+    if(e.target.classList.contains('del')){todos = todos.filter(function(t){return t.id!==id});}
+    else{todos = todos.map(function(t){if(t.id===id)t.done=!t.done;return t;});}
+    Lset('wb_todos',todos); render();
+  });
+  document.getElementById('clearDone').onclick = function(){
+    todos = todos.filter(function(t){return !(t.date===todayStr&&t.done)});
+    Lset('wb_todos',todos); render();
+  };
+  document.getElementById('habitGrid').addEventListener('click',function(e){
+    var row = e.target.closest('.habit'); if(!row) return;
+    var id = row.dataset.id;
+    if(!log[todayStr]) log[todayStr] = {};
+    if(log[todayStr][id]) delete log[todayStr][id]; else log[todayStr][id]=true;
+    Lset('wb_habitlog',log); render();
+  });
+
+  render();
+
+  // ---- Obsidian export ----
+  function genMd(){
+    var todayTodos = todos.filter(function(t){return t.date===todayStr});
+    var lines = ['# '+todayStr+' 工作台记录',''];
+    lines.push('## 待办事项');
+    if(!todayTodos.length){lines.push('（无）');}
+    else{todayTodos.forEach(function(t){lines.push('- ['+(t.done?'x':' ')+'] '+t.text);});}
+    lines.push('');
+    lines.push('## 习惯打卡');
+    habits.forEach(function(x){
+      var d = habitDoneToday(x.id);
+      var s = habitStreak(x.id);
+      lines.push('- '+x.ico+' '+x.name+': '+(d?'✅'+(s>0?' 连续 '+s+' 天':'') : '❌'));
+    });
+    lines.push('');
+    var allTotal = todayTodos.length + habits.length;
+    var d1 = todayTodos.filter(function(t){return t.done}).length;
+    var d2 = habits.filter(function(x){return habitDoneToday(x.id)}).length;
+    var pct = allTotal? Math.round((d1+d2)/allTotal*100):0;
+    lines.push('## 统计');
+    lines.push('- 待办完成: '+d1+'/'+todayTodos.length);
+    lines.push('- 打卡完成: '+d2+'/'+habits.length);
+    lines.push('- 连续天数: '+habits.reduce(function(m,x){return Math.max(m,habitStreak(x.id))},0));
+    lines.push('- 完成度: '+pct+'%');
+    return lines.join('\n');
+  }
+
+  function showToast(msg,ok){var t=document.getElementById('toast');t.textContent=msg;t.style.background=ok?'var(--ok)':'var(--danger)';t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2000);}
+
+  document.getElementById('saveObs').onclick = function(){
+    var vault = (document.getElementById('vaultName').value||'梦里星光').trim();
+    var path = (document.getElementById('savePath').value||'工作台记录').trim();
+    var md = genMd();
+    var file = path+'/'+todayStr;
+    var url = 'obsidian://new?vault='+encodeURIComponent(vault)+'&file='+encodeURIComponent(file)+'&content='+encodeURIComponent(md);
+    // Save vault/path prefs
+    Lset('wb_vaultName',vault); Lset('wb_savePath',path);
+    window.location.href = url;
+  };
+
+  document.getElementById('copyMd').onclick = function(){
+    var md = genMd();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(md).then(function(){showToast('已复制，可粘贴到 Obsidian',true);});
+    }else{
+      // fallback
+      var ta = document.createElement('textarea'); ta.value = md;
+      ta.style.position='fixed';ta.style.left='-9999px'; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      showToast('已复制，可粘贴到 Obsidian',true);
+    }
+  };
+
+  // Load saved vault/path prefs
+  document.getElementById('vaultName').value = Lget('wb_vaultName','梦里星光');
+  document.getElementById('savePath').value = Lget('wb_savePath','工作台记录');
+})();
+</script>
+</body>
+</html>
